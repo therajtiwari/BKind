@@ -75,6 +75,8 @@ class WelcomeScreen extends StatelessWidget {
                 onPressed: () {},
                 child: const Text('I need help'),
               ),
+
+              // add a button
             ],
           ),
         ),

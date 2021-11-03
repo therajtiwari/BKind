@@ -1,5 +1,6 @@
 import 'dart:ui' as ui;
 
+import 'package:bkind/screens/register.dart';
 import 'package:bkind/screens/welcome_screen.dart';
 import 'package:bkind/utils/constants.dart';
 import 'package:flutter/material.dart';
