@@ -1,6 +1,8 @@
 import 'dart:ui' as ui;
 
+import 'package:bkind/screens/register.dart';
 import 'package:bkind/screens/welcome_screen.dart';
+import 'package:bkind/screens/login_signup.dart';
 import 'package:bkind/utils/constants.dart';
 import 'package:flutter/material.dart';
 
@@ -23,7 +25,7 @@ class MyApp extends StatelessWidget {
         // accentColor: colorDarkBlues,
         textTheme: screenWidth < 500 ? textThemeSmall : textThemeDefault,
       ),
-      home: const WelcomeScreen(),
+      home: const LoginSignupScreen(),
     );
   }
 }
