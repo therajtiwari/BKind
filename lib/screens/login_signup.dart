@@ -1,9 +1,10 @@
 import "package:flutter/material.dart";
 import '../utils/widget_functions.dart';
 import "../utils/constants.dart";
+import 'package:bkind/screens/welcome_screen.dart';
 
-class WelcomeScreen extends StatelessWidget {
-  const WelcomeScreen({Key? key}) : super(key: key);
+class LoginSignupScreen extends StatelessWidget {
+  const LoginSignupScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -55,11 +56,11 @@ class WelcomeScreen extends StatelessWidget {
                   // mainAxisAlignment: MainAxisAlignment.center,
 
                   child: Text(
-                    'What you give today, you get tomorrow.',
+                    'Glad you are here',
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
+                      fontSize: 22,
+                      // fontWeight: FontWeight.bold,
                     ),
                   ),
                 ),
@@ -76,10 +77,15 @@ class WelcomeScreen extends StatelessWidget {
                     minimumSize: const Size(300, 50), //////// HERE
                   ),
                   onPressed: () {
-                    Navigator.pushNamed(context, './login_signup.dart');
+                    // Navigator.pushNamed(context, WelcomeScreen());
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const WelcomeScreen()),
+                    );
                   },
                   child: const Text(
-                    'I need help',
+                    'Sign In',
                     style: TextStyle(
                       fontSize: 20,
                     ),
@@ -95,10 +101,15 @@ class WelcomeScreen extends StatelessWidget {
                     minimumSize: const Size(300, 50), //////// HERE
                   ),
                   onPressed: () {
-                    Navigator.pushNamed(context, './login_signup.dart');
+                    // Navigator.pushNamed(context, WelcomeScreen());
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const WelcomeScreen()),
+                    );
                   },
                   child: const Text(
-                    'I am here to help',
+                    'Register',
                     style: TextStyle(
                       fontSize: 20,
                     ),
