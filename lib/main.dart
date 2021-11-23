@@ -4,14 +4,14 @@ import 'package:bkind/screens/register.dart';
 import 'package:bkind/screens/welcome_screen.dart';
 import 'package:bkind/screens/login.dart';
 import 'package:bkind/screens/login_signup.dart';
-import 'package:bkind/screens/home_blind.dart';
+import 'package:bkind/screens/Home.dart';
 import 'package:bkind/utils/constants.dart';
 import 'package:flutter/material.dart';
 
 void main() {
   runApp(
     MaterialApp(
-      initialRoute: '/auth/register',
+      initialRoute: '/auth/Home.dart',
       routes: {
         '/': (context) => Home(),
         '/auth': (context) => LoginSignupScreen(),
