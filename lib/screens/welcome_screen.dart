@@ -86,10 +86,6 @@ class WelcomeScreen extends StatelessWidget {
                   ),
                 ),
               ),
-<<<<<<< HEAD
-
-              // add a button
-=======
               addVerticalSpace(10),
               SizedBox(
                 child: ElevatedButton(
@@ -109,7 +105,6 @@ class WelcomeScreen extends StatelessWidget {
                   ),
                 ),
               )
->>>>>>> a84419c96fb69b6a7dfba14f34f4560edc4f275b
             ],
           ),
         ),
