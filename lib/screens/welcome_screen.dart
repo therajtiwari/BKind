@@ -73,10 +73,13 @@ class WelcomeScreen extends StatelessWidget {
                   style: ElevatedButton.styleFrom(
                     primary: colorDarkBlue,
                     onPrimary: Colors.white,
-                    minimumSize: const Size(300, 50), //////// HERE
+                    minimumSize: const Size(300, 50),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ), /////////// HERE
                   ),
                   onPressed: () {
-                    Navigator.pushNamed(context, './login_signup.dart');
+                    Navigator.pushNamed(context, 'auth/login');
                   },
                   child: const Text(
                     'I need help',
@@ -86,20 +89,19 @@ class WelcomeScreen extends StatelessWidget {
                   ),
                 ),
               ),
-<<<<<<< HEAD
-
-              // add a button
-=======
               addVerticalSpace(10),
               SizedBox(
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     primary: colorDarkBlue,
                     onPrimary: Colors.white,
-                    minimumSize: const Size(300, 50), //////// HERE
+                    minimumSize: const Size(300, 50), //
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ), ///////// HERE
                   ),
                   onPressed: () {
-                    Navigator.pushNamed(context, './login_signup.dart');
+                    Navigator.pushNamed(context, 'auth/login');
                   },
                   child: const Text(
                     'I am here to help',
@@ -109,7 +111,6 @@ class WelcomeScreen extends StatelessWidget {
                   ),
                 ),
               )
->>>>>>> a84419c96fb69b6a7dfba14f34f4560edc4f275b
             ],
           ),
         ),

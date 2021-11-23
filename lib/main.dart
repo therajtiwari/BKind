@@ -2,12 +2,25 @@ import 'dart:ui' as ui;
 
 import 'package:bkind/screens/register.dart';
 import 'package:bkind/screens/welcome_screen.dart';
+import 'package:bkind/screens/login.dart';
 import 'package:bkind/screens/login_signup.dart';
+import 'package:bkind/screens/home_blind.dart';
 import 'package:bkind/utils/constants.dart';
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    MaterialApp(
+      initialRoute: '/auth/register',
+      routes: {
+        '/': (context) => Home(),
+        '/auth': (context) => LoginSignupScreen(),
+        '/auth/register': (context) => Register(),
+        '/auth/login': (context) => Login(),
+        '/welcome': (context) => WelcomeScreen(),
+      },
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -17,6 +30,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double screenWidth = ui.window.physicalSize.width;
+
     return MaterialApp(
       title: 'BKind',
       debugShowCheckedModeBanner: false,
@@ -25,7 +39,6 @@ class MyApp extends StatelessWidget {
         // accentColor: colorDarkBlues,
         textTheme: screenWidth < 500 ? textThemeSmall : textThemeDefault,
       ),
-      home: const LoginSignupScreen(),
     );
   }
 }
