@@ -78,11 +78,12 @@ class LoginSignupScreen extends StatelessWidget {
                   ),
                   onPressed: () {
                     // Navigator.pushNamed(context, WelcomeScreen());
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const WelcomeScreen()),
-                    );
+                    // Navigator.push(
+                    //   context,
+                    //   MaterialPageRoute(
+                    //       builder: (context) => const WelcomeScreen()),
+                    // );
+                    Navigator.pushNamed(context, '/auth/login');
                   },
                   child: const Text(
                     'Sign In',
@@ -102,11 +103,12 @@ class LoginSignupScreen extends StatelessWidget {
                   ),
                   onPressed: () {
                     // Navigator.pushNamed(context, WelcomeScreen());
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const WelcomeScreen()),
-                    );
+                    // Navigator.push(
+                    //   context,
+                    //   MaterialPageRoute(
+                    //       builder: (context) => const WelcomeScreen()),
+                    // );
+                    Navigator.pushNamed(context, "/auth/register");
                   },
                   child: const Text(
                     'Register',

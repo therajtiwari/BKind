@@ -12,6 +12,7 @@ class Login extends StatelessWidget {
     return Scaffold(
         body: ListView(children: [
       Container(
+        margin: EdgeInsets.symmetric(horizontal: width * 0.08),
         width: size.width,
         height: size.height,
         child: Center(
@@ -21,6 +22,7 @@ class Login extends StatelessWidget {
               addVerticalSpace(height * 0.15),
               const Text(
                 'Welcome Back Kind Person',
+                textAlign: TextAlign.center,
                 style: TextStyle(
                     fontSize: 30,
                     fontWeight: FontWeight.bold,
@@ -37,8 +39,8 @@ class Login extends StatelessWidget {
               Column(
                 children: [
                   Container(
-                    margin: EdgeInsets.all(20),
-                    child: TextField(
+                    margin: const EdgeInsets.all(20),
+                    child: const TextField(
                       decoration: InputDecoration(
                         labelText: 'Email',
                         border: OutlineInputBorder(),
@@ -46,8 +48,8 @@ class Login extends StatelessWidget {
                     ),
                   ),
                   Container(
-                    margin: EdgeInsets.all(20),
-                    child: TextField(
+                    margin: const EdgeInsets.all(20),
+                    child: const TextField(
                       decoration: InputDecoration(
                         labelText: 'Password',
                         border: OutlineInputBorder(),
@@ -59,7 +61,7 @@ class Login extends StatelessWidget {
                     width: 350,
                     child: ElevatedButton(
                       // style: style,
-                      style: ButtonStyle(
+                      style: const ButtonStyle(
                           // backgroundColor:,
 
                           ),
@@ -72,11 +74,14 @@ class Login extends StatelessWidget {
                       ),
                     ),
                   ),
-                  Text(
-                    'Register',
-                    textAlign: TextAlign.end,
-                  )
-                ],
+                  addVerticalSpace(height * 0.02),
+                  InkWell(
+                    onTap: () {
+                      Navigator.pushNamed(context, "/auth/register");
+                    },
+                    child: const Text("Register"),
+                  ),
+                ],  
               ),
             ],
           ),
