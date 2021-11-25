@@ -50,6 +50,7 @@ class _RegisterState extends State<Register> {
     countries.sort((a, b) => a.toLowerCase().compareTo(b.toLowerCase()));
     // print(countries);
     print("done");
+    return "success";
   }
 
   @override
@@ -393,8 +394,8 @@ class _RegisterState extends State<Register> {
           padding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
           minWidth: MediaQuery.of(context).size.width,
           onPressed: () {
-            register(
-                emailEditingController.text, passwordEditingController.text);
+            register(emailEditingController.text.trim(),
+                passwordEditingController.text);
           },
           child: const Text(
             "Register",
