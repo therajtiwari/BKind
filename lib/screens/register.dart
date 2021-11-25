@@ -1,5 +1,3 @@
-import 'dart:html';
-
 import 'package:flutter/material.dart';
 import '../utils/widget_functions.dart';
 import "../utils/constants.dart";
@@ -15,20 +13,21 @@ class Register extends StatefulWidget {
 class _RegisterState extends State<Register> {
   final _formKey = GlobalKey<FormState>();
 
-  final firstNameEditingController = new TextEditingController();
+  final firstNameEditingController = TextEditingController();
 
-  final countryEditingController = new TextEditingController();
+  final countryEditingController = TextEditingController();
 
-  final emailEditingController = new TextEditingController();
+  final emailEditingController = TextEditingController();
 
-  final passwordEditingController = new TextEditingController();
+  final passwordEditingController = TextEditingController();
 
-  final confirmPasswordEditingController = new TextEditingController();
+  final confirmPasswordEditingController = TextEditingController();
 
-  final languageEditingController = new TextEditingController();
+  final languageEditingController = TextEditingController();
 
-  final timeEditingController = new TextEditingController();
+  final timeEditingController = TextEditingController();
   dynamic _value = 1;
+  dynamic _languageValue = "English";
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
@@ -45,8 +44,8 @@ class _RegisterState extends State<Register> {
         },
         textInputAction: TextInputAction.next,
         decoration: InputDecoration(
-          prefixIcon: Icon(Icons.account_circle),
-          contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+          prefixIcon: const Icon(Icons.account_circle),
+          contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
           hintText: "First Name",
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
@@ -63,8 +62,8 @@ class _RegisterState extends State<Register> {
         },
         textInputAction: TextInputAction.next,
         decoration: InputDecoration(
-          prefixIcon: Icon(Icons.flag_sharp),
-          contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+          prefixIcon: const Icon(Icons.flag_sharp),
+          contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
           hintText: "Country",
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
@@ -81,8 +80,8 @@ class _RegisterState extends State<Register> {
         },
         textInputAction: TextInputAction.next,
         decoration: InputDecoration(
-          prefixIcon: Icon(Icons.mail),
-          contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+          prefixIcon: const Icon(Icons.mail),
+          contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
           hintText: "Email",
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
@@ -99,8 +98,8 @@ class _RegisterState extends State<Register> {
         },
         textInputAction: TextInputAction.next,
         decoration: InputDecoration(
-          prefixIcon: Icon(Icons.vpn_key),
-          contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+          prefixIcon: const Icon(Icons.vpn_key),
+          contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
           hintText: "Password",
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
@@ -117,45 +116,82 @@ class _RegisterState extends State<Register> {
         },
         textInputAction: TextInputAction.next,
         decoration: InputDecoration(
-          prefixIcon: Icon(Icons.vpn_key),
-          contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+          prefixIcon: const Icon(Icons.vpn_key),
+          contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
           hintText: "Confirm Password",
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
           ),
         ));
 
-    final languageField = TextFormField(
-        autofocus: false,
-        controller: languageEditingController,
-        keyboardType: TextInputType.name,
-        onSaved: (value) {
-          languageEditingController.text = value!;
-        },
-        textInputAction: TextInputAction.done,
-        decoration: InputDecoration(
-          prefixIcon: Icon(Icons.language),
-          contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
-          hintText: "Preferred Language",
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10),
-          ),
-        ));
     final timeField = DropdownButtonFormField(
       value: _value,
-      items: [
+      items: const [
         DropdownMenuItem(
-          child: Text("First Item"),
+          child: Text("12:00 am - 06:00 am"),
           value: 1,
         ),
         DropdownMenuItem(
-          child: Text("Second Item"),
+          child: Text("06:00 am - 12:00 pm"),
           value: 2,
+        ),
+        DropdownMenuItem(
+          child: Text("12:00 pm - 06:00 pm"),
+          value: 3,
+        ),
+        DropdownMenuItem(
+          child: Text("06:00 pm - 12:00 am"),
+          value: 4,
         )
       ],
+      decoration: InputDecoration(
+        prefixIcon: const Icon(Icons.access_time),
+        contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
+        hintText: "Preferred Language",
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
+        ),
+      ),
       onChanged: (value) {
         setState(() {
           _value = value;
+          print(_value);
+        });
+      },
+    );
+
+    final languageField = DropdownButtonFormField(
+      value: _languageValue,
+      items: const [
+        DropdownMenuItem(
+          child: Text("Hindi"),
+          value: "Hindi",
+        ),
+        DropdownMenuItem(
+          child: Text("English"),
+          value: "English",
+        ),
+        DropdownMenuItem(
+          child: Text("French"),
+          value: "French",
+        ),
+        DropdownMenuItem(
+          child: Text("Spanish"),
+          value: "Spanish",
+        )
+      ],
+      decoration: InputDecoration(
+        prefixIcon: const Icon(Icons.access_time),
+        contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
+        hintText: "Preferred Language",
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
+        ),
+      ),
+      onChanged: (value) {
+        setState(() {
+          _languageValue = value;
+          print(_languageValue);
         });
       },
     );
@@ -166,10 +202,10 @@ class _RegisterState extends State<Register> {
       borderRadius: BorderRadius.circular(10),
       color: colorDarkBlue,
       child: MaterialButton(
-          padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+          padding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
           minWidth: MediaQuery.of(context).size.width,
           onPressed: () {},
-          child: Text(
+          child: const Text(
             "Register",
             textAlign: TextAlign.center,
             style: TextStyle(
@@ -183,7 +219,7 @@ class _RegisterState extends State<Register> {
         backgroundColor: Colors.transparent,
         elevation: 0,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: colorDarkBlue),
+          icon: const Icon(Icons.arrow_back, color: colorDarkBlue),
           onPressed: () {
             // passing this to our root
             Navigator.of(context).pop();
@@ -202,14 +238,14 @@ class _RegisterState extends State<Register> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
-                    SizedBox(
+                    const SizedBox(
                         height: 50,
                         child: Text('Hi there, Kind Person',
                             style: TextStyle(
                                 fontSize: 30,
                                 fontWeight: FontWeight.bold,
                                 color: Colors.black))),
-                    SizedBox(
+                    const SizedBox(
                         height: 50,
                         child: Text('Register to continue',
                             style: TextStyle(
@@ -217,22 +253,23 @@ class _RegisterState extends State<Register> {
                               fontWeight: FontWeight.normal,
                               color: Colors.black,
                             ))),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     firstNameField,
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     countryField,
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     emailField,
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     passwordField,
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     confirmPasswordField,
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     languageField,
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     timeField,
+                    const SizedBox(height: 20),
                     signUpButton,
-                    SizedBox(height: 15),
+                    const SizedBox(height: 15),
                   ],
                 ),
               ),
