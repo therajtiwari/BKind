@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../utils/widget_functions.dart';
 import "../utils/constants.dart";
+import 'package:intl/intl.dart';
 
 class Register extends StatefulWidget {
   // const Register({Key? key}) : super(key: key);
@@ -26,6 +27,10 @@ class _RegisterState extends State<Register> {
   final languageEditingController = TextEditingController();
 
   final timeEditingController = TextEditingController();
+
+  final timeFromInput = TextEditingController();
+  final timeTillInput = TextEditingController();
+
   dynamic _value = 1;
   dynamic _languageValue = "English";
   @override
@@ -124,42 +129,6 @@ class _RegisterState extends State<Register> {
           ),
         ));
 
-    final timeField = DropdownButtonFormField(
-      value: _value,
-      items: const [
-        DropdownMenuItem(
-          child: Text("12:00 am - 06:00 am"),
-          value: 1,
-        ),
-        DropdownMenuItem(
-          child: Text("06:00 am - 12:00 pm"),
-          value: 2,
-        ),
-        DropdownMenuItem(
-          child: Text("12:00 pm - 06:00 pm"),
-          value: 3,
-        ),
-        DropdownMenuItem(
-          child: Text("06:00 pm - 12:00 am"),
-          value: 4,
-        )
-      ],
-      decoration: InputDecoration(
-        prefixIcon: const Icon(Icons.access_time),
-        contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
-        hintText: "Preferred Language",
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10),
-        ),
-      ),
-      onChanged: (value) {
-        setState(() {
-          _value = value;
-          print(_value);
-        });
-      },
-    );
-
     final languageField = DropdownButtonFormField(
       value: _languageValue,
       items: const [
@@ -181,7 +150,7 @@ class _RegisterState extends State<Register> {
         )
       ],
       decoration: InputDecoration(
-        prefixIcon: const Icon(Icons.access_time),
+        prefixIcon: const Icon(Icons.language),
         contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
         hintText: "Preferred Language",
         border: OutlineInputBorder(
@@ -193,6 +162,82 @@ class _RegisterState extends State<Register> {
           _languageValue = value;
           print(_languageValue);
         });
+      },
+    );
+    final timeFromField = TextFormField(
+      controller: timeFromInput, //editing controller of this TextField
+
+      readOnly: true, //set it true, so that user will not able to edit text
+      decoration: InputDecoration(
+        prefixIcon: const Icon(Icons.access_time),
+        contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
+        hintText: "Preferred Time From",
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
+        ),
+      ),
+      onTap: () async {
+        TimeOfDay? pickedTime = await showTimePicker(
+          initialTime: TimeOfDay.now(),
+          context: context,
+        );
+
+        if (pickedTime != null) {
+          // print(pickedTime.format(context)); //output 10:51 PM
+          DateTime parsedTime =
+              DateFormat.jm().parse(pickedTime.format(context).toString());
+          //converting to DateTime so that we can further format on different pattern.
+          // print(parsedTime); //output 1970-01-01 22:53:00.000
+          String formattedTime = DateFormat('HH:mm:ss').format(parsedTime);
+          print(formattedTime); //output 14:59:00
+          //DateFormat() is from intl package, you can format the time on any pattern you need.
+
+          setState(
+            () {
+              timeFromInput.text = formattedTime; //set the value of text field.
+            },
+          );
+        } else {
+          print("Time is not selected");
+        }
+      },
+    );
+
+    final timeTillField = TextFormField(
+      controller: timeTillInput, //editing controller of this TextField
+      readOnly: true, //set it true, so that user will not able to edit text
+      decoration: InputDecoration(
+        prefixIcon: const Icon(Icons.access_time),
+        contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
+        hintText: "Preferred Time Till",
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
+        ),
+      ),
+      onTap: () async {
+        TimeOfDay? pickedTime = await showTimePicker(
+          initialTime: TimeOfDay.now(),
+          context: context,
+        );
+
+        if (pickedTime != null) {
+          // print(pickedTime.format(context)); //output 10:51 PM
+          DateTime parsedTime =
+              DateFormat.jm().parse(pickedTime.format(context).toString());
+          //converting to DateTime so that we can further format on different pattern.
+          // print(parsedTime); //output 1970-01-01 22:53:00.000
+          String formattedTime = DateFormat('HH:mm:ss').format(parsedTime);
+          print(formattedTime); //output 14:59:00
+          //DateFormat() is from intl package, you can format the time on any pattern you need.
+
+          setState(
+            () {
+              timeTillInput.text = formattedTime; //set the value of text field.
+            },
+          );
+        } else {
+          print("Time is not selected");
+        }
       },
     );
 
@@ -265,8 +310,12 @@ class _RegisterState extends State<Register> {
                     confirmPasswordField,
                     const SizedBox(height: 20),
                     languageField,
+                    // const SizedBox(height: 20),
+                    // timeField,
                     const SizedBox(height: 20),
-                    timeField,
+                    timeFromField,
+                    const SizedBox(height: 20),
+                    timeTillField,
                     const SizedBox(height: 20),
                     signUpButton,
                     const SizedBox(height: 15),
