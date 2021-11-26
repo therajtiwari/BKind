@@ -5,15 +5,16 @@ import 'package:bkind/screens/welcome_screen.dart';
 import 'package:bkind/screens/login.dart';
 import 'package:bkind/screens/login_signup.dart';
 import 'package:bkind/screens/Home.dart';
+import 'package:bkind/screens/Home_vol.dart';
 import 'package:bkind/utils/constants.dart';
 import 'package:flutter/material.dart';
 
 void main() {
   runApp(
     MaterialApp(
-      initialRoute: '/auth/Home.dart',
+      initialRoute: '/auth/Home_vol.dart',
       routes: {
-        '/': (context) => Home(),
+        '/': (context) => Home_vol(),
         '/auth': (context) => LoginSignupScreen(),
         '/auth/register': (context) => Register(),
         '/auth/login': (context) => Login(),

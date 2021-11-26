@@ -17,7 +17,11 @@ class Home extends StatelessWidget {
             Container(
               alignment: Alignment.topCenter,
               margin: EdgeInsets.only(
-                  left: 7.0, right: 7.0, top: 50.0, bottom: 10.0),
+                left: 7.0,
+                right: 7.0,
+                top: 50.0,
+                bottom: 10.0,
+              ),
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   minimumSize: const Size(350, 450),
