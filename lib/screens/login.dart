@@ -1,7 +1,12 @@
+import 'package:bkind/screens/home_volunteer.dart';
 import 'package:bkind/screens/register.dart';
 import 'package:bkind/utils/constants.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import '../utils/widget_functions.dart';
+import 'Home.dart';
+import 'home_volunteer.dart';
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
@@ -15,8 +20,14 @@ class _LoginState extends State<Login> {
   final _formKey = GlobalKey<FormState>();
 
   // editing controller
-  final TextEditingController emailController = new TextEditingController();
-  final TextEditingController passwordController = new TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+
+  //firebase
+  final _auth = FirebaseAuth.instance;
+
+  String? errorMessage;
+
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
@@ -27,13 +38,24 @@ class _LoginState extends State<Login> {
         autofocus: false,
         controller: emailController,
         keyboardType: TextInputType.emailAddress,
+        validator: (value) {
+          if (value!.isEmpty) {
+            return 'Please enter your email';
+          }
+          // reg expression for email validation
+          if (!RegExp("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]")
+              .hasMatch(value)) {
+            return ("Please Enter a valid email");
+          }
+          return null;
+        },
         onSaved: (value) {
           emailController.text = value!;
         },
         textInputAction: TextInputAction.next,
         decoration: InputDecoration(
-          prefixIcon: Icon(Icons.mail),
-          contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+          prefixIcon: const Icon(Icons.mail),
+          contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
           hintText: "Email",
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
@@ -44,13 +66,18 @@ class _LoginState extends State<Login> {
         autofocus: false,
         controller: passwordController,
         obscureText: true,
+        validator: (value) {
+          if (value!.isEmpty) {
+            return ("Password is required for login");
+          }
+        },
         onSaved: (value) {
           passwordController.text = value!;
         },
         textInputAction: TextInputAction.done,
         decoration: InputDecoration(
-          prefixIcon: Icon(Icons.vpn_key),
-          contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+          prefixIcon: const Icon(Icons.vpn_key),
+          contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
           hintText: "Password",
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
@@ -62,10 +89,12 @@ class _LoginState extends State<Login> {
       borderRadius: BorderRadius.circular(10),
       color: colorDarkBlue,
       child: MaterialButton(
-          padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+          padding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
           minWidth: width,
-          onPressed: () {},
-          child: Text(
+          onPressed: () {
+            signIn(emailController.text, passwordController.text);
+          },
+          child: const Text(
             "Sign In",
             textAlign: TextAlign.center,
             style: TextStyle(
@@ -87,7 +116,7 @@ class _LoginState extends State<Login> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
-                    Text(
+                    const Text(
                       'Welcome Back Kind Person',
                       textAlign: TextAlign.center,
                       style: TextStyle(
@@ -95,7 +124,7 @@ class _LoginState extends State<Login> {
                           fontWeight: FontWeight.bold,
                           color: Colors.black),
                     ),
-                    SizedBox(height: 7),
+                    const SizedBox(height: 7),
                     const Text(
                       'Sign in to continue',
                       style: TextStyle(
@@ -103,17 +132,17 @@ class _LoginState extends State<Login> {
                           color: Colors.black,
                           fontWeight: FontWeight.normal),
                     ),
-                    SizedBox(height: 45),
+                    const SizedBox(height: 45),
                     emailField,
-                    SizedBox(height: 25),
+                    const SizedBox(height: 25),
                     passwordField,
-                    SizedBox(height: 35),
+                    const SizedBox(height: 35),
                     loginButton,
-                    SizedBox(height: 15),
+                    const SizedBox(height: 15),
                     Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
-                          Text("Don't have an account? "),
+                          const Text("Don't have an account? "),
                           GestureDetector(
                             onTap: () {
                               Navigator.push(
@@ -121,7 +150,7 @@ class _LoginState extends State<Login> {
                                   MaterialPageRoute(
                                       builder: (context) => Register()));
                             },
-                            child: Text(
+                            child: const Text(
                               "SignUp",
                               style: TextStyle(
                                   color: colorDarkBlue,
@@ -138,5 +167,40 @@ class _LoginState extends State<Login> {
         ),
       ),
     );
+  }
+
+  // login function
+  void signIn(String email, String password) async {
+    if (_formKey.currentState!.validate()) {
+      try {
+        await _auth
+            .signInWithEmailAndPassword(email: email, password: password)
+            .then((uid) => {
+                  Fluttertoast.showToast(msg: "Login Successful"),
+                  Navigator.of(context).pushReplacement(MaterialPageRoute(
+                      builder: (context) => const HomeVolunteer())),
+                });
+      } on FirebaseAuthException catch (error) {
+        switch (error.code) {
+          case "invalid-email":
+            errorMessage = "Your email address appears to be malformed.";
+            break;
+          case "user-not-found":
+            errorMessage = "User with this email doesn't exist.";
+            break;
+          case "user-disabled":
+            errorMessage = "User with this email has been disabled.";
+            break;
+          case "too-many-requests":
+            errorMessage = "Try again later.";
+            break;
+
+          default:
+            errorMessage = "Invalid Credentials";
+        }
+        Fluttertoast.showToast(msg: errorMessage!);
+        print(error.code);
+      }
+    }
   }
 }
