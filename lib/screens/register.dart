@@ -1,5 +1,3 @@
-import 'dart:html';
-
 import 'package:flutter/material.dart';
 import '../utils/widget_functions.dart';
 import "../utils/constants.dart";
@@ -156,6 +154,7 @@ class _RegisterState extends State<Register> {
       onChanged: (value) {
         setState(() {
           _value = value;
+          print(_value);
         });
       },
     );
@@ -231,8 +230,8 @@ class _RegisterState extends State<Register> {
                     languageField,
                     SizedBox(height: 20),
                     timeField,
+                    SizedBox(height: 20),
                     signUpButton,
-                    SizedBox(height: 15),
                   ],
                 ),
               ),
