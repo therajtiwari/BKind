@@ -32,18 +32,17 @@ class PickupLayout extends StatelessWidget {
               if (snapshot.hasData && !snapshot.data!.exists) {
                 return scaffold;
               }
-              print("okkkkkkkkkkkkkkkkkkkk");
+              // print("okkkkkkkkkkkkkkkkkkkk");
 
-              // Call call = Call.fromMap(snapshot.data.data);
               Map<String, dynamic> data =
                   snapshot.data?.data() as Map<String, dynamic>;
-              print("downnnnnnnnnn");
+              // print("downnnnnnnnnn");
               Call call = Call.fromMap(data);
-
               if (!call.hasDialled) {
                 return PickupScreen(call: call);
+              } else {
+                return scaffold;
               }
-              return scaffold;
             },
           )
         : Scaffold(

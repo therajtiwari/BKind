@@ -18,7 +18,10 @@ class CallMethods {
       Map<String, dynamic> hasNotDialledMap = call.toMap(call);
 
       await callCollection.doc(call.callerId).set(hasDialledMap);
+      print("done firstr");
       await callCollection.doc(call.receiverId).set(hasNotDialledMap);
+      print("done second");
+
       return true;
     } catch (e) {
       print(e);

@@ -64,8 +64,8 @@ class _HomeVolunteerState extends State<HomeVolunteer> {
         .get()
         .then((value) {
       toCallUser = UserModel.fromMap(value.docs[0].data());
-      print(toCallUser.name);
 
+      print(toCallUser.name);
       setState(() {});
     });
   }
