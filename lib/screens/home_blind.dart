@@ -1,83 +1,58 @@
-import 'package:bkind/models/user_model.dart';
-import 'package:bkind/screens/login.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:bkind/utils/constants.dart';
 import 'package:flutter/material.dart';
 
-// void main() => runApp(MyApp());
+// void main() => runApp(Home());
 
-class Home extends StatefulWidget {
-  const Home({Key? key}) : super(key: key);
-
-  @override
-  _HomeState createState() => _HomeState();
-}
-
-class _HomeState extends State<Home> {
-  User? user = FirebaseAuth.instance.currentUser;
-  UserModel loggedInUser = UserModel();
-//get user details
-  @override
-  void initState() {
-    super.initState();
-    FirebaseFirestore.instance
-        .collection("users")
-        .doc(user!.uid)
-        .get()
-        .then((value) {
-      this.loggedInUser = UserModel.fromMap(value.data());
-      setState(() {});
-    });
-  }
-
+class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        home: Scaffold(
-      appBar: AppBar(title: const Text('bKind')), //AppBar
-      body: Column(
-        children: [
-          Container(
-            alignment: Alignment.center,
-            margin: EdgeInsets.only(
-                left: 10.0, right: 10.0, top: 250.0, bottom: 10.0),
-            child: ElevatedButton(
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text('bKind'),
+          backgroundColor: colorDarkBlue,
+        ), //AppBar
+        body: SingleChildScrollView(
+          child: Column(children: [
+            Container(
+              alignment: Alignment.topCenter,
+              margin: const EdgeInsets.only(
+                left: 7.0,
+                right: 7.0,
+                top: 50.0,
+                bottom: 10.0,
+              ),
+              child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  minimumSize: const Size(300, 200), //////// HERE
+                  minimumSize: const Size(350, 450),
+                  primary: colorBlue2,
                 ),
-                child: Text('Call'),
-                onPressed: () {}),
-          ),
-          Container(
-            alignment: Alignment.center,
-            margin: EdgeInsets.only(
-                left: 10.0, right: 10.0, top: 10.0, bottom: 10.0),
-            child: ElevatedButton(
-                child: Text("dummy testing hi ${loggedInUser.name}"),
-                onPressed: () {}),
-          ),
-          ElevatedButton(
-            child: Text(
-              'Logout',
-              style: TextStyle(fontSize: 15.0),
+                child: Text('Call first available user'),
+                onPressed: () {},
+              ),
             ),
-            onPressed: () {
-              logout(context);
-            },
-            style: ElevatedButton.styleFrom(
-              primary: Colors.red[900],
-              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+          ]),
+        ),
+        bottomNavigationBar: BottomAppBar(
+            child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            IconButton(
+              icon: Icon(Icons.home),
+              onPressed: () {},
             ),
-          ),
-        ],
-        // add a textbox
+            IconButton(
+              icon: Icon(Icons.dialpad_outlined),
+              // alignment: Center,
+              onPressed: () {},
+            ),
+            IconButton(
+              icon: Icon(Icons.settings),
+              onPressed: () {},
+            ),
+          ],
+        )),
       ),
-    ));
-  }
-
-  Future<void> logout(BuildContext context) async {
-    await FirebaseAuth.instance.signOut();
-    Navigator.of(context)
-        .pushReplacement(MaterialPageRoute(builder: (context) => Login()));
+    );
   }
 }
