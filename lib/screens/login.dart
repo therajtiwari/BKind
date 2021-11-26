@@ -1,10 +1,12 @@
+import 'package:bkind/screens/home_volunteer.dart';
 import 'package:bkind/screens/register.dart';
 import 'package:bkind/utils/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import '../utils/widget_functions.dart';
-import 'home_blind.dart';
+import 'Home.dart';
+import 'home_volunteer.dart';
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
@@ -175,8 +177,8 @@ class _LoginState extends State<Login> {
             .signInWithEmailAndPassword(email: email, password: password)
             .then((uid) => {
                   Fluttertoast.showToast(msg: "Login Successful"),
-                  Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(builder: (context) => Home())),
+                  Navigator.of(context).pushReplacement(MaterialPageRoute(
+                      builder: (context) => const HomeVolunteer())),
                 });
       } on FirebaseAuthException catch (error) {
         switch (error.code) {

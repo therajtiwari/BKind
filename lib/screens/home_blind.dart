@@ -34,7 +34,7 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return MaterialApp(
         home: Scaffold(
-      appBar: AppBar(title: Text('bKind')), //AppBar
+      appBar: AppBar(title: const Text('bKind')), //AppBar
       body: Column(
         children: [
           Container(
