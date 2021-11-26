@@ -89,6 +89,9 @@ class WelcomeScreen extends StatelessWidget {
                   ),
                 ),
               ),
+
+              // add a button
+
               addVerticalSpace(10),
               SizedBox(
                 child: ElevatedButton(
