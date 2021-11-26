@@ -15,7 +15,15 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   User? user = FirebaseAuth.instance.currentUser;
-  UserModel loggedInUser = UserModel();
+  UserModel loggedInUser = UserModel(
+      country: '',
+      email: '',
+      language: '',
+      name: '',
+      pTimeFrom: '',
+      pTimeTill: '',
+      uid: '',
+      userSince: '');
 //get user details
   @override
   void initState() {

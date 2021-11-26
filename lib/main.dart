@@ -1,5 +1,6 @@
 import 'dart:ui' as ui;
 
+import 'package:bkind/provider/user_provider.dart';
 import 'package:bkind/screens/home_volunteer.dart';
 import 'package:bkind/screens/home_blind.dart';
 import 'package:bkind/screens/login.dart';
@@ -11,6 +12,7 @@ import 'package:bkind/screens/login_signup.dart';
 import 'package:bkind/utils/constants.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 // void main() {
 // runApp(
@@ -39,15 +41,20 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double screenWidth = ui.window.physicalSize.width;
-    return MaterialApp(
-      title: 'BKind',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primaryColor: colorWhite,
-        // accentColor: colorDarkBlues,
-        textTheme: screenWidth < 500 ? textThemeSmall : textThemeDefault,
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => UserProvider()),
+      ],
+      child: MaterialApp(
+        title: 'BKind',
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          primaryColor: colorWhite,
+          // accentColor: colorDarkBlues,
+          textTheme: screenWidth < 500 ? textThemeSmall : textThemeDefault,
+        ),
+        home: const Login(),
       ),
-      home: const Login(),
     );
   }
 }

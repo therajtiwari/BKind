@@ -40,6 +40,10 @@ dependencies:
   intl: ^0.17.0
   http: ^0.13.4
   convert: ^3.0.1
+  agora_rtc_engine: ^1.0.8
+  permission_handler: 3.0.0
+  firebase_storage: ^10.1.0
+  provider: ^6.0.1
 
 dev_dependencies:
   flutter_test:

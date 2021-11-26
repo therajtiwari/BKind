@@ -1,22 +1,22 @@
 class UserModel {
-  String? uid;
-  String? name;
-  String? email;
-  String? country;
-  String? language;
-  String? pTimeFrom;
-  String? pTimeTill;
-  String? userSince;
+  String uid;
+  String name;
+  String email;
+  String country;
+  String language;
+  String pTimeFrom;
+  String pTimeTill;
+  String userSince;
 
   UserModel(
-      {this.uid,
-      this.name,
-      this.email,
-      this.country,
-      this.language,
-      this.pTimeFrom,
-      this.pTimeTill,
-      this.userSince});
+      {required this.uid,
+      required this.name,
+      required this.email,
+      required this.country,
+      required this.language,
+      required this.pTimeFrom,
+      required this.pTimeTill,
+      required this.userSince});
 
   //get the data from server
   factory UserModel.fromMap(map) {
