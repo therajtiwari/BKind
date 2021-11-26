@@ -9,7 +9,7 @@ class Home extends StatelessWidget {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: Text('bKind'),
+          title: const Text('bKind'),
           backgroundColor: colorDarkBlue,
         ), //AppBar
         body: SingleChildScrollView(
@@ -27,7 +27,7 @@ class Home extends StatelessWidget {
                   minimumSize: const Size(350, 450),
                   primary: colorBlue2,
                 ),
-                child: Text('Call first available user'),
+                child: const Text('Call first available user'),
                 onPressed: () {},
               ),
             ),
@@ -38,16 +38,16 @@ class Home extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             IconButton(
-              icon: Icon(Icons.home),
+              icon: const Icon(Icons.home),
               onPressed: () {},
             ),
             IconButton(
-              icon: Icon(Icons.dialpad_outlined),
+              icon: const Icon(Icons.dialpad_outlined),
               // alignment: Center,
               onPressed: () {},
             ),
             IconButton(
-              icon: Icon(Icons.settings),
+              icon: const Icon(Icons.settings),
               onPressed: () {},
             ),
           ],

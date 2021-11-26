@@ -8,8 +8,9 @@ import 'package:flutter/material.dart';
 
 class HomeVolunteer extends StatefulWidget {
   const HomeVolunteer({Key? key}) : super(key: key);
+
   @override
-  State<HomeVolunteer> createState() => _HomeVolunteerState();
+  _HomeVolunteerState createState() => _HomeVolunteerState();
 }
 
 class _HomeVolunteerState extends State<HomeVolunteer> {
@@ -58,63 +59,82 @@ class _HomeVolunteerState extends State<HomeVolunteer> {
                   // height: 100.0,
 
                   child: Text(
-                    "Hello ${loggedInUser.name}!",
+                    "Hello, ${loggedInUser.name}",
                     style: TextStyle(fontSize: 20),
                   ),
                 ),
                 Container(
                   // width: 200.0,
                   // height: 100.0,
-                  margin: EdgeInsets.only(
-                    left: 10,
-                    top: 25,
+                  margin: const EdgeInsets.only(
+                    // left: 10,
+                    top: 5,
+                    bottom: 20,
                   ),
-                  child: Text(
-                    "Welcome to bKind!",
+                  child: const Text(
+                    "Welcome to bKind !",
                     style: TextStyle(fontSize: 20),
                   ),
                 ),
                 Container(
-                  height: 150.0,
+                  height: 250.0,
                   width: 300.0,
                   color: Colors.transparent,
                   // margin: EdgeInsets.all(20),
                   child: Container(
-                      decoration: BoxDecoration(
-                          color: Colors.blue,
-                          borderRadius:
-                              BorderRadius.all(Radius.circular(10.0))),
-                      child: new Center(
-                        child: new Text(
-                          "Rounded Corner Rectangle Shape",
-                          style: TextStyle(color: Colors.white, fontSize: 22),
-                          textAlign: TextAlign.center,
-                        ),
-                      )),
+                    decoration: const BoxDecoration(
+                        color: colorBlue2,
+                        borderRadius: BorderRadius.all(Radius.circular(10.0))),
+                    child: Center(
+                      child: Image.asset(
+                        'assets/earth.png',
+                        width: 200,
+                        height: 200,
+                      ),
+                    ),
+                  ),
+                ),
+                Container(
+                  // alignment: Alignment.topCenter,
+                  margin: const EdgeInsets.only(
+                    // left: 7.0,
+                    // right: 7.0,
+                    top: 140.0,
+                    // bottom: 10.0,
+                  ),
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      minimumSize: const Size(300, 50),
+                      primary: colorBlue4,
+                    ),
+                    child: const Text('Learn how to call'),
+                    onPressed: () {},
+                  ),
                 ),
               ],
             ),
           ),
         ),
         bottomNavigationBar: BottomAppBar(
-            child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            IconButton(
-              icon: Icon(Icons.home),
-              onPressed: () {},
-            ),
-            IconButton(
-              icon: Icon(Icons.dialpad_outlined),
-              // alignment: Center,
-              onPressed: () {},
-            ),
-            IconButton(
-              icon: Icon(Icons.settings),
-              onPressed: () {},
-            ),
-          ],
-        )),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              IconButton(
+                icon: const Icon(Icons.home),
+                onPressed: () {},
+              ),
+              IconButton(
+                icon: const Icon(Icons.dialpad_outlined),
+                // alignment: Center,
+                onPressed: () {},
+              ),
+              IconButton(
+                icon: const Icon(Icons.settings),
+                onPressed: () {},
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
