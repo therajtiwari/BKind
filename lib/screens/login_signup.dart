@@ -1,3 +1,4 @@
+import 'package:bkind/screens/register.dart';
 import "package:flutter/material.dart";
 import '../utils/widget_functions.dart';
 import "../utils/constants.dart";
@@ -103,12 +104,11 @@ class LoginSignupScreen extends StatelessWidget {
                   ),
                   onPressed: () {
                     // Navigator.pushNamed(context, WelcomeScreen());
-                    // Navigator.push(
-                    //   context,
-                    //   MaterialPageRoute(
-                    //       builder: (context) => const WelcomeScreen()),
-                    // );
-                    Navigator.pushNamed(context, "/auth/register");
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => Register()),
+                    );
+                    // Navigator.pushNamed(context, "/auth/register");
                   },
                   child: const Text(
                     'Register',

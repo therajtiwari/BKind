@@ -54,7 +54,11 @@ class MyApp extends StatelessWidget {
           // accentColor: colorDarkBlues,
           textTheme: screenWidth < 500 ? textThemeSmall : textThemeDefault,
         ),
+<<<<<<< HEAD
         home: RegisterBlind(),
+=======
+        home: const WelcomeScreen(),
+>>>>>>> 44a904e828ad67ad165ecf80d748f99cc4669257
       ),
     );
   }
