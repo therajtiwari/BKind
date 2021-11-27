@@ -1,6 +1,7 @@
 import 'package:bkind/models/call.dart';
 import 'package:bkind/resources/call_methods.dart';
 import 'package:bkind/screens/callscreens/call_screen.dart';
+import 'package:bkind/utils/permissions.dart';
 // import 'package:bkind/utils/permissions.dart';
 import 'package:flutter/material.dart';
 
@@ -49,19 +50,18 @@ class PickupScreen extends StatelessWidget {
                 ),
                 const SizedBox(width: 25),
                 IconButton(
-                    icon: const Icon(Icons.call),
-                    color: Colors.green,
-                    onPressed: () {}
-                    //   onPressed: () async =>
-                    //       await Permissions.cameraAndMicrophonePermissionsGranted()
-                    //           ? Navigator.push(
-                    //               context,
-                    //               MaterialPageRoute(
-                    //                 builder: (context) => CallScreen(call: call),
-                    //               ),
-                    //             )
-                    //           : {},
-                    ),
+                  icon: const Icon(Icons.call),
+                  color: Colors.green,
+                  onPressed: () async =>
+                      await Permissions.cameraAndMicrophonePermissionsGranted()
+                          ? Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => CallScreen(call: call),
+                              ),
+                            )
+                          : {},
+                ),
               ],
             ),
           ],
