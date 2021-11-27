@@ -23,7 +23,8 @@ class _HomeState extends State<Home> {
       pTimeFrom: '',
       pTimeTill: '',
       uid: '',
-      userSince: '');
+      userSince: '',
+      isVol: false);
 //get user details
   @override
   void initState() {

@@ -531,14 +531,15 @@ class _RegisterState extends State<Register> {
         pTimeFrom: '',
         pTimeTill: '',
         uid: '',
-        userSince: '');
+        userSince: '',
+        isVol: false);
     print("hereeeeeeeeeee");
     // writing all the values
     userModel.email = user!.email!;
     userModel.uid = user.uid;
     userModel.name = nameEditingController.text;
     userModel.email = emailEditingController.text;
-    userModel.country = countryEditingController.text;
+    userModel.country = _countryValue;
     userModel.language = _languageValue;
     userModel.pTimeFrom = timeFromInput.text;
     userModel.pTimeTill = timeTillInput.text;
