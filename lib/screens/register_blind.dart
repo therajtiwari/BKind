@@ -11,6 +11,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
+// error @ 540, 552
 class RegisterBlind extends StatefulWidget {
   // const Register({Key? key}) : super(key: key);
 
@@ -80,7 +81,7 @@ class _RegisterBlindState extends State<RegisterBlind> {
 //
   final timeEditingController = TextEditingController();
 
-  // final isVol = false;
+  bool isVolunteer = false;
 
   String timeFromField = "00:00:00";
   String timeTillInput = "01:00:00";
@@ -345,7 +346,7 @@ class _RegisterBlindState extends State<RegisterBlind> {
     //   },
     // );
 
-    final timeTillField = "01:00:00";
+    // final timeTillField = "01:00:00";
     // TextFormField(
     //   controller: timeTillInput, //editing controller of this TextField
     //   validator: (value) {
@@ -536,7 +537,7 @@ class _RegisterBlindState extends State<RegisterBlind> {
       pTimeTill: '',
       uid: '',
       userSince: '',
-      // isVol: false,
+      // isVol: '',
     );
     print("hereeeeeeeeeee");
     // writing all the values
@@ -548,7 +549,8 @@ class _RegisterBlindState extends State<RegisterBlind> {
     userModel.language = _languageValue;
     userModel.pTimeFrom = timeFromField;
     userModel.pTimeTill = timeTillInput;
-    userModel.isVol = false;
+    // userModel.isVol = isVolunteer;
+
     // userModel.userSince = DateTime.now().millisecondsSinceEpoch as String?;
     userModel.userSince =
         DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now());
