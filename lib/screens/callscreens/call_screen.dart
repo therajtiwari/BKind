@@ -30,6 +30,7 @@ class _CallScreenState extends State<CallScreen> {
   static final _users = <int>[];
   final _infoStrings = <String>[];
   bool muted = false;
+  bool videoMuted = false;
 
   @override
   void initState() {
@@ -332,6 +333,18 @@ class _CallScreenState extends State<CallScreen> {
             padding: const EdgeInsets.all(12.0),
           ),
           RawMaterialButton(
+            onPressed: _onToggleSwitchVideo,
+            child: Icon(
+              videoMuted ? Icons.videocam : Icons.videocam_off,
+              color: videoMuted ? Colors.white : Colors.blueAccent,
+              size: 20.0,
+            ),
+            shape: CircleBorder(),
+            elevation: 2.0,
+            fillColor: videoMuted ? Colors.blueAccent : Colors.white,
+            padding: const EdgeInsets.all(12.0),
+          ),
+          RawMaterialButton(
             onPressed: () => callMethods.endCall(
               call: widget.call,
             ),
@@ -376,6 +389,22 @@ class _CallScreenState extends State<CallScreen> {
       muted = !muted;
     });
     AgoraRtcEngine.muteLocalAudioStream(muted);
+    // AgoraRtcEngine.disableVideo();
+    // AgoraRtcEngine.enableVideo();
+  }
+
+  void _onToggleSwitchVideo() {
+    setState(() {
+      videoMuted = !videoMuted;
+    });
+    // AgoraRtcEngine.muteLocalAudioStream(muted);
+    if (videoMuted) {
+      AgoraRtcEngine.disableVideo();
+    } else {
+      AgoraRtcEngine.enableVideo();
+    }
+    // AgoraRtcEngine.disableVideo();
+    // AgoraRtcEngine.enableVideo();
   }
 
   /// Helper function to get list of native views
