@@ -3,6 +3,7 @@ import 'package:bkind/provider/user_provider.dart';
 import 'package:bkind/screens/callscreens/pickup/pickup_layout.dart';
 import 'package:bkind/utils/call_utilis.dart';
 import 'package:bkind/utils/constants.dart';
+import 'package:bkind/utils/permissions.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -150,12 +151,15 @@ class _HomeVolunteerState extends State<HomeVolunteer> {
                         primary: colorBlue4,
                       ),
                       child: const Text('Learn how to call'),
-                      onPressed: () {
+                      onPressed: () async {
                         print("calling");
-                        CallUtils.dial(
-                            from: loggedInUser,
-                            to: toCallUser,
-                            context: context);
+                        await Permissions
+                                .cameraAndMicrophonePermissionsGranted()
+                            ? CallUtils.dial(
+                                from: loggedInUser,
+                                to: toCallUser,
+                                context: context)
+                            : print("no permission");
                       },
                     ),
                   ),
