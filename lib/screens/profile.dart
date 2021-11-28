@@ -1,7 +1,14 @@
+import 'package:bkind/models/user_model.dart';
+import 'package:bkind/provider/user_provider.dart';
 import 'package:bkind/screens/update.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import "package:flutter/material.dart";
+import 'package:flutter/scheduler.dart';
+import 'package:provider/provider.dart';
 import '../utils/widget_functions.dart';
 import "../utils/constants.dart";
+import 'login.dart';
 
 class Profile extends StatefulWidget {
   const Profile({Key? key}) : super(key: key);
@@ -11,11 +18,40 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
+  User? user = FirebaseAuth.instance.currentUser;
+
+  UserModel loggedInUser = UserModel(
+      country: '',
+      email: '',
+      language: '',
+      name: '',
+      pTimeFrom: '',
+      pTimeTill: '',
+      uid: '',
+      userSince: '',
+      isVol: false);
+
+  @override
+  void initState() {
+    super.initState();
+
+    FirebaseFirestore.instance
+        .collection("users")
+        .doc(user?.uid)
+        .get()
+        .then((value) {
+      loggedInUser = UserModel.fromMap(value.data());
+      setState(() {});
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
+    CollectionReference users = FirebaseFirestore.instance.collection('users');
+
     return MaterialApp(
       home: Scaffold(
           appBar: AppBar(
@@ -33,7 +69,7 @@ class _ProfileState extends State<Profile> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => const Update()));
+                                builder: (context) => Update(loggedInUser)));
                         print('Edit btn clicked');
                       },
                       icon: const Icon(Icons.edit)),
@@ -48,13 +84,15 @@ class _ProfileState extends State<Profile> {
                           backgroundColor: Colors.grey,
                         ),
                         addVerticalSpace(height * 0.05),
-                        const Text('Riya Joy'),
+                        Text(
+                          "Hello, ${loggedInUser.name}",
+                        ),
                         addVerticalSpace(height * 0.02),
-                        const Text('Country: India'),
+                        Text('Country: ${loggedInUser.country} '),
                         addVerticalSpace(height * 0.02),
-                        const Text('Email : riya.joy@somaiya.edu'),
+                        Text('Email : ${loggedInUser.email}'),
                         addVerticalSpace(height * 0.02),
-                        const Text('Language : English'),
+                        Text('Language : ${loggedInUser.language} '),
                         addVerticalSpace(height * 0.2),
                         Material(
                           elevation: 5,
@@ -64,7 +102,10 @@ class _ProfileState extends State<Profile> {
                               padding: const EdgeInsets.symmetric(
                                   horizontal: 0, vertical: 10.0),
                               minWidth: MediaQuery.of(context).size.width,
-                              onPressed: () {},
+                              onPressed: () {
+                                logout(context);
+                                print('Logout');
+                              },
                               child: const Text(
                                 "Logout",
                                 textAlign: TextAlign.center,
@@ -82,5 +123,11 @@ class _ProfileState extends State<Profile> {
             ),
           )),
     );
+  }
+
+  Future<void> logout(BuildContext context) async {
+    await FirebaseAuth.instance.signOut();
+    Navigator.of(context).pushReplacement(
+        MaterialPageRoute(builder: (context) => const Login()));
   }
 }

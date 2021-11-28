@@ -1,6 +1,7 @@
 import 'package:bkind/models/user_model.dart';
 import 'package:bkind/provider/user_provider.dart';
 import 'package:bkind/screens/callscreens/pickup/pickup_layout.dart';
+import 'package:bkind/screens/profile.dart';
 import 'package:bkind/utils/call_utilis.dart';
 import 'package:bkind/utils/constants.dart';
 import 'package:bkind/utils/permissions.dart';
@@ -184,7 +185,12 @@ class _HomeVolunteerState extends State<HomeVolunteer> {
                 ),
                 IconButton(
                   icon: const Icon(Icons.settings),
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const Profile()));
+                  },
                 ),
               ],
             ),

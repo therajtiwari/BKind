@@ -537,7 +537,7 @@ class _RegisterBlindState extends State<RegisterBlind> {
       pTimeTill: '',
       uid: '',
       userSince: '',
-      // isVol: '',
+      isVol: false,
     );
     print("hereeeeeeeeeee");
     // writing all the values

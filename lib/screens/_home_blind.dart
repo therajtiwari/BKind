@@ -75,7 +75,7 @@ class _HomeState extends State<Home> {
             },
             style: ElevatedButton.styleFrom(
               primary: Colors.red[900],
-              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
             ),
           ),
         ],
@@ -86,7 +86,7 @@ class _HomeState extends State<Home> {
 
   Future<void> logout(BuildContext context) async {
     await FirebaseAuth.instance.signOut();
-    Navigator.of(context)
-        .pushReplacement(MaterialPageRoute(builder: (context) => Login()));
+    Navigator.of(context).pushReplacement(
+        MaterialPageRoute(builder: (context) => const Login()));
   }
 }
