@@ -1,3 +1,4 @@
+import 'package:bkind/screens/login_signup.dart';
 import "package:flutter/material.dart";
 import '../utils/widget_functions.dart';
 import "../utils/constants.dart";
@@ -95,7 +96,11 @@ class WelcomeScreen extends StatelessWidget {
                     minimumSize: const Size(300, 50), //////// HERE
                   ),
                   onPressed: () {
-                    Navigator.pushNamed(context, './login_signup.dart');
+                    // Navigator.pushNamed(context, './login_signup.dart');
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => LoginSignupScreen()));
                   },
                   child: const Text(
                     'I am here to help',

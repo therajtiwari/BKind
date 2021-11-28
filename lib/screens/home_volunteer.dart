@@ -30,7 +30,8 @@ class _HomeVolunteerState extends State<HomeVolunteer> {
       pTimeFrom: '',
       pTimeTill: '',
       uid: '',
-      userSince: '');
+      userSince: '',
+      isVol: false);
 
   UserModel toCallUser = UserModel(
       country: '',
@@ -40,7 +41,8 @@ class _HomeVolunteerState extends State<HomeVolunteer> {
       pTimeFrom: '',
       pTimeTill: '',
       uid: '',
-      userSince: '');
+      userSince: '',
+      isVol: true);
 
   @override
   void initState() {
