@@ -1,4 +1,9 @@
+import 'package:bkind/models/user_model.dart';
+import 'package:bkind/screens/profile.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import "package:flutter/material.dart";
+import 'package:fluttertoast/fluttertoast.dart';
 import '../utils/widget_functions.dart';
 import "../utils/constants.dart";
 
@@ -8,26 +13,25 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 class Update extends StatefulWidget {
-  const Update({Key? key}) : super(key: key);
+  UserModel? loggedInUser;
+
+  Update(this.loggedInUser, {Key? key}) : super(key: key);
 
   @override
   _UpdateState createState() => _UpdateState();
 }
 
 class _UpdateState extends State<Update> {
+  User? user = FirebaseAuth.instance.currentUser;
+
   final _formKey = GlobalKey<FormState>();
 
   final String url = "https://api.first.org/data/v1/countries";
   List countries = [];
   List countriess = ['xyz'];
 
-  String name = "Riya Joy";
-  String email = "riyajoy@somaiya.edu";
-  String country = "India";
-  String password = "123456";
-
-  String role = "Vol";
-
+  final nameEditingController = TextEditingController();
+  final emailEditingController = TextEditingController();
   final timeEditingController = TextEditingController();
   final timeFromInput = TextEditingController();
   final timeTillInput = TextEditingController();
@@ -65,37 +69,40 @@ class _UpdateState extends State<Update> {
     // print("doing");
     getSWData();
     // print("done");
+    Fluttertoast.showToast(msg: "Please enter your all details ");
   }
 
   dynamic _value = 1;
   dynamic _languageValue = "English";
   dynamic _countryValue = "India";
-
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
 
+    String name = widget.loggedInUser!.name;
+    String email = widget.loggedInUser!.email;
+
+    String password = "123456";
+    bool role = widget.loggedInUser!.isVol;
+
     //Name
     final nameField = TextFormField(
       autofocus: false,
       keyboardType: TextInputType.name,
-      initialValue: name,
       textInputAction: TextInputAction.next,
       decoration: InputDecoration(
         prefixIcon: const Icon(Icons.account_circle),
         contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
-        // hintText: "First Name",
+        hintText: name,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
         ),
       ),
       onChanged: (value) {
-        setState(() {
-          name = value;
-          print(name);
-        });
+        nameEditingController.text = value!;
+        print(name);
       },
       validator: (value) {
         RegExp regex = RegExp(r'^.{3,}$');
@@ -112,18 +119,15 @@ class _UpdateState extends State<Update> {
     final emailField = TextFormField(
       autofocus: false,
       keyboardType: TextInputType.emailAddress,
-      initialValue: email,
       onChanged: (value) {
-        setState(() {
-          email = value;
-          print(email);
-        });
+        emailEditingController.text = value!;
+        print(email);
       },
       textInputAction: TextInputAction.next,
       decoration: InputDecoration(
         prefixIcon: const Icon(Icons.mail),
         contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
-        hintText: "Email",
+        hintText: email,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
         ),
@@ -338,8 +342,7 @@ class _UpdateState extends State<Update> {
           padding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
           minWidth: MediaQuery.of(context).size.width,
           onPressed: () {
-            // register(emailEditingController.text.trim(),
-            //     passwordEditingController.text);
+            updateDetailsToFirestore(email, name);
           },
           child: const Text(
             "Update",
@@ -396,15 +399,15 @@ class _UpdateState extends State<Update> {
                     languageField,
                     // const SizedBox(height: 20),
                     // timeField,
-                    (role == "Vol")
+                    (role == true)
                         ? const SizedBox(height: 20)
                         : const SizedBox(height: 0),
-                    (role == "Vol") ? timeFromField : const Text(''),
-                    (role == "Vol")
+                    (role == true) ? timeFromField : const Text(''),
+                    (role == true)
                         ? const SizedBox(height: 20)
                         : const SizedBox(height: 0),
-                    (role == "Vol") ? timeTillField : const Text(''),
-                    (role == "Vol")
+                    (role == true) ? timeTillField : const Text(''),
+                    (role == true)
                         ? const SizedBox(height: 20)
                         : const SizedBox(height: 0),
                     updateButton,
@@ -417,5 +420,62 @@ class _UpdateState extends State<Update> {
         ),
       ),
     );
+  }
+
+  updateDetailsToFirestore(String email, String name) async {
+    // calling our firestore
+    // calling our user model
+    // sedning these values
+
+    FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
+
+    // User? user = _auth.currentUser;
+
+    UserModel userModel = UserModel(
+        country: '',
+        email: '',
+        language: '',
+        name: '',
+        pTimeFrom: '',
+        pTimeTill: '',
+        uid: '',
+        userSince: '',
+        isVol: false);
+    print("hereeeeeeeeeee");
+    print(email);
+    print(name);
+    // writing all the values
+
+    userModel.uid = user!.uid;
+    userModel.name = nameEditingController.text;
+    userModel.email = emailEditingController.text;
+    userModel.country = _countryValue;
+    userModel.language = _languageValue;
+    userModel.pTimeFrom = timeFromInput.text;
+    userModel.pTimeTill = timeTillInput.text;
+    // userModel.userSince = DateTime.now().millisecondsSinceEpoch as String?;
+    userModel.userSince =
+        DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now());
+    // print("Account created successfully 1:) ");
+
+    await FirebaseFirestore.instance
+        .collection("users")
+        .doc(user!.uid)
+        .update({
+          'name': userModel.name,
+          'email': userModel.email,
+          'country': userModel.country,
+          'language': userModel.language,
+          'pTimeFrom': userModel.pTimeFrom,
+          'pTimeTill': userModel.pTimeTill
+        })
+        .then((value) =>
+            Fluttertoast.showToast(msg: "Account updated successfully :) "))
+        .then((value) => Navigator.pushAndRemoveUntil(
+            (context),
+            MaterialPageRoute(builder: (context) => const Profile()),
+            (route) => false));
+
+    // print("Account created successfully :) ");
   }
 }

@@ -6,6 +6,7 @@ import 'package:bkind/screens/home_blind.dart';
 import 'package:bkind/screens/login.dart';
 import 'package:bkind/screens/profile.dart';
 import 'package:bkind/screens/register.dart';
+import 'package:bkind/screens/register_blind.dart';
 import 'package:bkind/screens/settings.dart';
 import 'package:bkind/screens/welcome_screen.dart';
 import 'package:bkind/screens/login_signup.dart';
@@ -53,7 +54,7 @@ class MyApp extends StatelessWidget {
           // accentColor: colorDarkBlues,
           textTheme: screenWidth < 500 ? textThemeSmall : textThemeDefault,
         ),
-        home: const Login(),
+        home: const Profile(),
       ),
     );
   }
