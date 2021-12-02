@@ -443,16 +443,15 @@ class _RegisterBlindState extends State<RegisterBlind> {
     User? user = _auth.currentUser;
 
     UserModel userModel = UserModel(
-      country: '',
-      email: '',
-      language: '',
-      name: '',
-      pTimeFrom: '',
-      pTimeTill: '',
-      uid: '',
-      userSince: '',
-      isVol: false,
-    );
+        country: '',
+        email: '',
+        language: '',
+        name: '',
+        pTimeFrom: '',
+        pTimeTill: '',
+        uid: '',
+        userSince: '',
+        isVol: true);
     print("hereeeeeeeeeee");
     // writing all the values
     userModel.email = user!.email!;
