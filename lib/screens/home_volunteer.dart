@@ -32,24 +32,21 @@ class _HomeVolunteerState extends State<HomeVolunteer> {
       userSince: '',
       isVol: false,
       rating: 5);
-
-  UserModel toCallUser = UserModel(
-      country: '',
-      email: '',
-      language: '',
-      name: '',
-      pTimeFrom: '',
-      pTimeTill: '',
-      uid: '',
-      userSince: '',
-      isVol: true,
-      rating: 5);
+  // String totalSize = '0';
+  // getTotalUsers() async {
+  //   print("inside hereeeeeeeeeeeeeee");
+  //   FirebaseFirestore.instance.collection('users').snapshots().map((event) => {
+  //         totalSize = event.docs.length.toString(),
+  //         print("printing this"),
+  //         print(totalSize)
+  //       });
+  // }
 
   @override
   void initState() {
     super.initState();
+
     SchedulerBinding.instance?.addPostFrameCallback((_) {
-      print("postngggggggggg");
       userProvider = Provider.of<UserProvider>(context, listen: false);
       userProvider.refreshUser();
     });
@@ -59,17 +56,6 @@ class _HomeVolunteerState extends State<HomeVolunteer> {
         .get()
         .then((value) {
       loggedInUser = UserModel.fromMap(value.data());
-      setState(() {});
-    });
-
-    FirebaseFirestore.instance
-        .collection('users')
-        .where('email', isEqualTo: "rajb@gmail.com")
-        .get()
-        .then((value) {
-      toCallUser = UserModel.fromMap(value.docs[0].data());
-
-      print(toCallUser.name);
       setState(() {});
     });
   }
@@ -82,7 +68,7 @@ class _HomeVolunteerState extends State<HomeVolunteer> {
           appBar: AppBar(
             title: const Text('bKind'),
             backgroundColor: colorDarkBlue,
-          ), //AppBar
+          ),
           body: SingleChildScrollView(
             child: Padding(
               padding:
@@ -90,19 +76,7 @@ class _HomeVolunteerState extends State<HomeVolunteer> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  // Container(
-                  //   margin: EdgeInsets.only(
-                  //     left: 7.0,
-                  //     top: 25.0,
-                  //   ),
-                  //   child: Text(
-                  //     "Hello user_name"
-                  //   ),
-                  // ),
                   Container(
-                    // width: 200.0,
-                    // height: 100.0,
-
                     child: Text(
                       "Hello, ${loggedInUser.name}",
                       style: const TextStyle(fontSize: 20),
@@ -125,7 +99,6 @@ class _HomeVolunteerState extends State<HomeVolunteer> {
                     height: 250.0,
                     width: 300.0,
                     color: Colors.transparent,
-                    // margin: EdgeInsets.all(20),
                     child: Container(
                       decoration: const BoxDecoration(
                           color: colorBlue2,
@@ -143,28 +116,16 @@ class _HomeVolunteerState extends State<HomeVolunteer> {
                   Container(
                     // alignment: Alignment.topCenter,
                     margin: const EdgeInsets.only(
-                      // left: 7.0,
-                      // right: 7.0,
                       top: 140.0,
                       // bottom: 10.0,
                     ),
                     child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        minimumSize: const Size(300, 50),
-                        primary: colorBlue4,
-                      ),
-                      child: const Text('Learn how to call'),
-                      onPressed: () async {
-                        print("calling");
-                        await Permissions
-                                .cameraAndMicrophonePermissionsGranted()
-                            ? CallUtils.dial(
-                                from: loggedInUser,
-                                to: toCallUser,
-                                context: context)
-                            : print("no permission");
-                      },
-                    ),
+                        style: ElevatedButton.styleFrom(
+                          minimumSize: const Size(300, 50),
+                          primary: colorBlue4,
+                        ),
+                        child: const Text('Learn how to call'),
+                        onPressed: () {}),
                   ),
                 ],
               ),
