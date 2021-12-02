@@ -43,6 +43,8 @@ class WelcomeScreen extends StatelessWidget {
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
                       color: Colors.white,
+                      image: const DecorationImage(
+                          image: AssetImage('assets/bKind.png')),
                       boxShadow: [
                         BoxShadow(
                           color: Colors.black.withOpacity(0.1),
