@@ -55,7 +55,7 @@ class MyApp extends StatelessWidget {
           // accentColor: colorDarkBlues,
           textTheme: screenWidth < 500 ? textThemeSmall : textThemeDefault,
         ),
-        home: const LoginSignupScreen(),
+        home: AboutUs(),
       ),
     );
   }
