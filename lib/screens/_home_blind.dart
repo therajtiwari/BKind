@@ -24,7 +24,8 @@ class _HomeState extends State<Home> {
       pTimeTill: '',
       uid: '',
       userSince: '',
-      isVol: false);
+      isVol: false,
+      rating: 5);
 //get user details
   @override
   void initState() {
@@ -44,42 +45,45 @@ class _HomeState extends State<Home> {
     return MaterialApp(
         home: Scaffold(
       appBar: AppBar(title: const Text('bKind')), //AppBar
-      body: Column(
-        children: [
-          Container(
-            alignment: Alignment.center,
-            margin: EdgeInsets.only(
-                left: 10.0, right: 10.0, top: 250.0, bottom: 10.0),
-            child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  minimumSize: const Size(300, 200), //////// HERE
-                ),
-                child: Text('Call'),
-                onPressed: () {}),
-          ),
-          Container(
-            alignment: Alignment.center,
-            margin: EdgeInsets.only(
-                left: 10.0, right: 10.0, top: 10.0, bottom: 10.0),
-            child: ElevatedButton(
-                child: Text("dummy testing hi ${loggedInUser.name}"),
-                onPressed: () {}),
-          ),
-          ElevatedButton(
-            child: Text(
-              'Logout',
-              style: TextStyle(fontSize: 15.0),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Container(
+              alignment: Alignment.center,
+              margin: const EdgeInsets.only(
+                  left: 10.0, right: 10.0, top: 250.0, bottom: 10.0),
+              child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    minimumSize: const Size(300, 200), //////// HERE
+                  ),
+                  child: Text('Call'),
+                  onPressed: () {}),
             ),
-            onPressed: () {
-              logout(context);
-            },
-            style: ElevatedButton.styleFrom(
-              primary: Colors.red[900],
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+            Container(
+              alignment: Alignment.center,
+              margin: const EdgeInsets.only(
+                  left: 10.0, right: 10.0, top: 10.0, bottom: 10.0),
+              child: ElevatedButton(
+                  child: Text("dummy testing hi ${loggedInUser.name}"),
+                  onPressed: () {}),
             ),
-          ),
-        ],
-        // add a textbox
+            ElevatedButton(
+              child: const Text(
+                'Logout',
+                style: TextStyle(fontSize: 15.0),
+              ),
+              onPressed: () {
+                logout(context);
+              },
+              style: ElevatedButton.styleFrom(
+                primary: Colors.red[900],
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+              ),
+            ),
+          ],
+          // add a textbox
+        ),
       ),
     ));
   }

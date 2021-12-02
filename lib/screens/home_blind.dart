@@ -3,6 +3,7 @@ import 'package:bkind/provider/user_provider.dart';
 import 'package:bkind/screens/callscreens/pickup/pickup_layout.dart';
 // import 'package:bkind/utils/call_utilis.dart';
 import 'package:bkind/utils/constants.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 // import 'package:bkind/utils/permissions.dart';
 import 'package:flutter/material.dart';
 // import 'package:cloud_firestore/cloud_firestore.dart';
@@ -11,37 +12,39 @@ import 'package:flutter/material.dart';
 // import 'package:flutter/scheduler.dart';
 // import 'package:provider/provider.dart';
 
-// class Home extends StatefulWidget {
-//   const Home({Key? key}) : super(key: key);
+class HomeBlind extends StatefulWidget {
+  const HomeBlind({Key? key}) : super(key: key);
 
-//   @override
-//   _Home createState() => _Home();
-// }
+  @override
+  _HomeBlind createState() => _HomeBlind();
+}
 
-// class _Home extends State<Home> {
-//   late UserProvider userProvider;
-//   User? user = FirebaseAuth.instance.currentUser;
-//   UserModel loggedInUser = UserModel(
-//       country: '',
-//       email: '',
-//       language: '',
-//       name: '',
-//       pTimeFrom: '',
-//       pTimeTill: '',
-//       uid: '',
-//       userSince: '',
-//       isVol: true);
+class _HomeBlind extends State<HomeBlind> {
+  late UserProvider userProvider;
+  User? user = FirebaseAuth.instance.currentUser;
+  UserModel loggedInUser = UserModel(
+      country: '',
+      email: '',
+      language: '',
+      name: '',
+      pTimeFrom: '',
+      pTimeTill: '',
+      uid: '',
+      userSince: '',
+      isVol: true,
+      rating: 5);
 
-//   UserModel toCallUser = UserModel(
-//       country: '',
-//       email: '',
-//       language: '',
-//       name: '',
-//       pTimeFrom: '',
-//       pTimeTill: '',
-//       uid: '',
-//       userSince: '',
-//       isVol: false);
+  UserModel toCallUser = UserModel(
+      country: '',
+      email: '',
+      language: '',
+      name: '',
+      pTimeFrom: '',
+      pTimeTill: '',
+      uid: '',
+      userSince: '',
+      isVol: false,
+      rating: 5);
 
 //   @override
 //   void initState() {
@@ -60,19 +63,45 @@ import 'package:flutter/material.dart';
 //       setState(() {});
 //     });
 
-//     FirebaseFirestore.instance
-//         .collection('users')
-//         .where('email', isEqualTo: "raj@gmail.com")
-//         .get()
-//         .then((value) {
-//       toCallUser = UserModel.fromMap(value.docs[0].data());
+    // FirebaseFirestore.instance
+    //     .collection('users')
+    //     .where('pTimeFrom',
+    //         isGreaterThanOrEqualTo: DateTime.now().hour.toString() +
+    //             ":" +
+    //             DateTime.now().minute.toString() +
+    //             ":" +
+    //             DateTime.now().second.toString())
+    //     .where('pTimeTill',
+    //         isLessThanOrEqualTo: DateTime.now().hour.toString() +
+    //             ":" +
+    //             DateTime.now().minute.toString() +
+    //             ":" +
+    //             DateTime.now().second.toString())
+    //     .where('pTimeFrom',
+    //         isGreaterThanOrEqualTo: DateTime.now().hour.toString() +
+    //             ":" +
+    //             DateTime.now().minute.toString() +
+    //             ":" +
+    //             DateTime.now().second.toString())
+    //     .where('language', isEqualTo: loggedInUser.language)
+    //     .where('rating', isGreaterThanOrEqualTo: 4)
+    //     .get()
+    //     .then((value) {
+    //   toCallUser = UserModel.fromMap(value.docs[0].data());
+    // });
 
-//       print(toCallUser.name);
-//       setState(() {});
-//     });
-//   }
+    FirebaseFirestore.instance
+        .collection('users')
+        .where('email', isEqualTo: "raj254@gmail.com")
+        .get()
+        .then((value) {
+      toCallUser = UserModel.fromMap(value.docs[0].data());
+      // print(toCallUser.name);
+      setState(() {});
+    });
+  }
 
-class Home extends StatelessWidget {
+// class HomeBlind extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -97,7 +126,17 @@ class Home extends StatelessWidget {
                   primary: colorBlue2,
                 ),
                 child: const Text('Call first available user'),
+<<<<<<< HEAD
                 onPressed: () {},
+=======
+                onPressed: () async {
+                  // print("calling");
+                  await Permissions.cameraAndMicrophonePermissionsGranted()
+                      ? CallUtils.dial(
+                          from: loggedInUser, to: toCallUser, context: context)
+                      : print("no permission");
+                },
+>>>>>>> a3ed3ed458f9a556a944e5a32b95af780a495dad
               ),
             ),
           ]),
