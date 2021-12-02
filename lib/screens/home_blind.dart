@@ -1,16 +1,15 @@
 import 'package:bkind/models/user_model.dart';
 import 'package:bkind/provider/user_provider.dart';
 import 'package:bkind/screens/callscreens/pickup/pickup_layout.dart';
-// import 'package:bkind/utils/call_utilis.dart';
+import 'package:bkind/utils/call_utilis.dart';
 import 'package:bkind/utils/constants.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-// import 'package:bkind/utils/permissions.dart';
+import 'package:bkind/utils/permissions.dart';
 import 'package:flutter/material.dart';
-// import 'package:cloud_firestore/cloud_firestore.dart';
-// import 'package:firebase_auth/firebase_auth.dart';
-// import 'package:flutter/material.dart';
-// import 'package:flutter/scheduler.dart';
-// import 'package:provider/provider.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
+import 'package:provider/provider.dart';
 
 class HomeBlind extends StatefulWidget {
   const HomeBlind({Key? key}) : super(key: key);
@@ -46,22 +45,22 @@ class _HomeBlind extends State<HomeBlind> {
       isVol: false,
       rating: 5);
 
-//   @override
-//   void initState() {
-//     super.initState();
-//     SchedulerBinding.instance?.addPostFrameCallback((_) {
-//       print("postngggggggggg");
-//       userProvider = Provider.of<UserProvider>(context, listen: false);
-//       userProvider.refreshUser();
-//     });
-//     FirebaseFirestore.instance
-//         .collection("users")
-//         .doc(user!.uid)
-//         .get()
-//         .then((value) {
-//       loggedInUser = UserModel.fromMap(value.data());
-//       setState(() {});
-//     });
+  @override
+  void initState() {
+    super.initState();
+    SchedulerBinding.instance?.addPostFrameCallback((_) {
+      print("postngggggggggg");
+      userProvider = Provider.of<UserProvider>(context, listen: false);
+      userProvider.refreshUser();
+    });
+    FirebaseFirestore.instance
+        .collection("users")
+        .doc(user!.uid)
+        .get()
+        .then((value) {
+      loggedInUser = UserModel.fromMap(value.data());
+      setState(() {});
+    });
 
     // FirebaseFirestore.instance
     //     .collection('users')
@@ -126,9 +125,6 @@ class _HomeBlind extends State<HomeBlind> {
                   primary: colorBlue2,
                 ),
                 child: const Text('Call first available user'),
-<<<<<<< HEAD
-                onPressed: () {},
-=======
                 onPressed: () async {
                   // print("calling");
                   await Permissions.cameraAndMicrophonePermissionsGranted()
@@ -136,7 +132,6 @@ class _HomeBlind extends State<HomeBlind> {
                           from: loggedInUser, to: toCallUser, context: context)
                       : print("no permission");
                 },
->>>>>>> a3ed3ed458f9a556a944e5a32b95af780a495dad
               ),
             ),
           ]),
