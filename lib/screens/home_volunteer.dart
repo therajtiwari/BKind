@@ -11,8 +11,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
 
-// void main() => runApp(Home());
-
 class HomeVolunteer extends StatefulWidget {
   const HomeVolunteer({Key? key}) : super(key: key);
 

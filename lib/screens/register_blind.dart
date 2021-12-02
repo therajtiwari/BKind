@@ -537,7 +537,7 @@ class _RegisterBlindState extends State<RegisterBlind> {
       pTimeTill: '',
       uid: '',
       userSince: '',
-      isVol: false,
+      // isVol: '',
     );
     print("hereeeeeeeeeee");
     // writing all the values
@@ -549,7 +549,7 @@ class _RegisterBlindState extends State<RegisterBlind> {
     userModel.language = _languageValue;
     userModel.pTimeFrom = timeFromField;
     userModel.pTimeTill = timeTillInput;
-    // userModel.isVol = isVolunteer;
+    userModel.isVol = isVolunteer;
 
     // userModel.userSince = DateTime.now().millisecondsSinceEpoch as String?;
     userModel.userSince =
