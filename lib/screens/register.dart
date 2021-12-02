@@ -1,5 +1,6 @@
 import 'package:bkind/models/user_model.dart';
 import 'package:bkind/screens/_home_blind.dart';
+import 'package:bkind/screens/home_volunteer.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -532,7 +533,7 @@ class _RegisterState extends State<Register> {
         pTimeTill: '',
         uid: '',
         userSince: '',
-        isVol: false);
+        isVol: true);
     print("hereeeeeeeeeee");
     // writing all the values
     userModel.email = user!.email!;
@@ -555,7 +556,9 @@ class _RegisterState extends State<Register> {
     Fluttertoast.showToast(msg: "Account created successfully :) ");
     // print("Account created successfully :) ");
 
-    Navigator.pushAndRemoveUntil((context),
-        MaterialPageRoute(builder: (context) => Home()), (route) => false);
+    Navigator.pushAndRemoveUntil(
+        (context),
+        MaterialPageRoute(builder: (context) => const HomeVolunteer()),
+        (route) => false);
   }
 }

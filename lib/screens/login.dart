@@ -1,5 +1,6 @@
 import 'package:bkind/screens/home_volunteer.dart';
 import 'package:bkind/screens/register.dart';
+import 'package:bkind/screens/welcome_screen.dart';
 import 'package:bkind/utils/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -148,7 +149,8 @@ class _LoginState extends State<Login> {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => Register()));
+                                      builder: (context) =>
+                                          const WelcomeScreen()));
                             },
                             child: const Text(
                               "SignUp",
