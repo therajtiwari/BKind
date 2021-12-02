@@ -30,7 +30,8 @@ class _HomeBlind extends State<HomeBlind> {
       pTimeTill: '',
       uid: '',
       userSince: '',
-      isVol: true);
+      isVol: true,
+      rating: 5);
 
   UserModel toCallUser = UserModel(
       country: '',
@@ -41,7 +42,8 @@ class _HomeBlind extends State<HomeBlind> {
       pTimeTill: '',
       uid: '',
       userSince: '',
-      isVol: false);
+      isVol: false,
+      rating: 5);
 
   @override
   void initState() {
@@ -60,14 +62,40 @@ class _HomeBlind extends State<HomeBlind> {
       setState(() {});
     });
 
+    // FirebaseFirestore.instance
+    //     .collection('users')
+    //     .where('pTimeFrom',
+    //         isGreaterThanOrEqualTo: DateTime.now().hour.toString() +
+    //             ":" +
+    //             DateTime.now().minute.toString() +
+    //             ":" +
+    //             DateTime.now().second.toString())
+    //     .where('pTimeTill',
+    //         isLessThanOrEqualTo: DateTime.now().hour.toString() +
+    //             ":" +
+    //             DateTime.now().minute.toString() +
+    //             ":" +
+    //             DateTime.now().second.toString())
+    //     .where('pTimeFrom',
+    //         isGreaterThanOrEqualTo: DateTime.now().hour.toString() +
+    //             ":" +
+    //             DateTime.now().minute.toString() +
+    //             ":" +
+    //             DateTime.now().second.toString())
+    //     .where('language', isEqualTo: loggedInUser.language)
+    //     .where('rating', isGreaterThanOrEqualTo: 4)
+    //     .get()
+    //     .then((value) {
+    //   toCallUser = UserModel.fromMap(value.docs[0].data());
+    // });
+
     FirebaseFirestore.instance
         .collection('users')
-        .where('email', isEqualTo: "raj@gmail.com")
+        .where('email', isEqualTo: "raj254@gmail.com")
         .get()
         .then((value) {
       toCallUser = UserModel.fromMap(value.docs[0].data());
-
-      print(toCallUser.name);
+      // print(toCallUser.name);
       setState(() {});
     });
   }
@@ -98,7 +126,7 @@ class _HomeBlind extends State<HomeBlind> {
                 ),
                 child: const Text('Call first available user'),
                 onPressed: () async {
-                  print("calling");
+                  // print("calling");
                   await Permissions.cameraAndMicrophonePermissionsGranted()
                       ? CallUtils.dial(
                           from: loggedInUser, to: toCallUser, context: context)

@@ -8,6 +8,7 @@ class UserModel {
   String pTimeTill;
   String userSince;
   bool isVol;
+  int rating;
 
   UserModel(
       {required this.uid,
@@ -18,7 +19,8 @@ class UserModel {
       required this.pTimeFrom,
       required this.pTimeTill,
       required this.userSince,
-      required this.isVol});
+      required this.isVol,
+      required this.rating});
 
   //get the data from server
   factory UserModel.fromMap(map) {
@@ -32,6 +34,7 @@ class UserModel {
       pTimeTill: map['pTimeTill'],
       userSince: map['userSince'],
       isVol: map['isVol'],
+      rating: map['rating'],
     );
   }
 
@@ -47,6 +50,7 @@ class UserModel {
       'pTimeTill': pTimeTill,
       'userSince': userSince,
       'isVol': isVol,
+      'rating': rating,
     };
   }
 }

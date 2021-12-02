@@ -24,7 +24,8 @@ class _HomeState extends State<Home> {
       pTimeTill: '',
       uid: '',
       userSince: '',
-      isVol: false);
+      isVol: false,
+      rating: 5);
 //get user details
   @override
   void initState() {
@@ -49,7 +50,7 @@ class _HomeState extends State<Home> {
           children: [
             Container(
               alignment: Alignment.center,
-              margin: EdgeInsets.only(
+              margin: const EdgeInsets.only(
                   left: 10.0, right: 10.0, top: 250.0, bottom: 10.0),
               child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
@@ -60,14 +61,14 @@ class _HomeState extends State<Home> {
             ),
             Container(
               alignment: Alignment.center,
-              margin: EdgeInsets.only(
+              margin: const EdgeInsets.only(
                   left: 10.0, right: 10.0, top: 10.0, bottom: 10.0),
               child: ElevatedButton(
                   child: Text("dummy testing hi ${loggedInUser.name}"),
                   onPressed: () {}),
             ),
             ElevatedButton(
-              child: Text(
+              child: const Text(
                 'Logout',
                 style: TextStyle(fontSize: 15.0),
               ),

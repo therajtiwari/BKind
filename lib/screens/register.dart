@@ -533,7 +533,8 @@ class _RegisterState extends State<Register> {
         pTimeTill: '',
         uid: '',
         userSince: '',
-        isVol: true);
+        isVol: true,
+        rating: 5);
     print("hereeeeeeeeeee");
     // writing all the values
     userModel.email = user!.email!;
