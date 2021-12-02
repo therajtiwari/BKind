@@ -389,8 +389,7 @@ class _UpdateState extends State<Update> {
                     nameField,
 
                     const SizedBox(height: 20),
-                    emailField,
-                    const SizedBox(height: 20),
+
                     passwordField,
 
                     const SizedBox(height: 20),
