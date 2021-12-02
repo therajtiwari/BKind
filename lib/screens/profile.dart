@@ -1,6 +1,10 @@
 import 'package:bkind/models/user_model.dart';
 import 'package:bkind/provider/user_provider.dart';
+import 'package:bkind/screens/home_blind.dart';
+import 'package:bkind/screens/home_volunteer.dart';
 import 'package:bkind/screens/update.dart';
+import 'package:bkind/screens/about_us.dart';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import "package:flutter/material.dart";
@@ -84,11 +88,57 @@ class _ProfileState extends State<Profile> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
+                              builder: (context) => loggedInUser.isVol
+                                  ? const HomeVolunteer()
+                                  : const HomeBlind()));
+                    },
+                    icon: const Icon(Icons.home),
+                  ),
+                  title: const Text('Home'),
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => loggedInUser.isVol
+                                ? const HomeVolunteer()
+                                : const HomeBlind()));
+                  },
+                ),
+                ListTile(
+                  leading: IconButton(
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
                               builder: (context) => const Profile()));
                     },
                     icon: const Icon(Icons.account_circle),
                   ),
                   title: const Text('Profile'),
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const Profile()));
+                  },
+                ),
+                ListTile(
+                  leading: IconButton(
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => AboutUs(loggedInUser)));
+                    },
+                    icon: const Icon(Icons.info),
+                  ),
+                  title: const Text('About Us'),
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => AboutUs(loggedInUser)));
+                  },
                 ),
                 ListTile(
                   leading: IconButton(
@@ -98,6 +148,9 @@ class _ProfileState extends State<Profile> {
                     icon: const Icon(Icons.logout),
                   ),
                   title: const Text('Logout'),
+                  onTap: () {
+                    logout(context);
+                  },
                 ),
 
                 // ignore: prefer_const_constructors
