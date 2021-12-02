@@ -1,6 +1,7 @@
 import 'package:bkind/screens/home_volunteer.dart';
 import 'package:bkind/screens/register.dart';
 import 'package:bkind/screens/welcome_screen.dart';
+import 'package:bkind/screens/login_wrapper.dart';
 import 'package:bkind/utils/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -105,65 +106,63 @@ class _LoginState extends State<Login> {
 
     return Scaffold(
       backgroundColor: Colors.white,
-      body: SingleChildScrollView(
-        child: Center(
-          child: SingleChildScrollView(
-            child: Container(
-              color: Colors.white,
-              child: Padding(
-                padding: const EdgeInsets.all(26.0),
-                child: Form(
-                  key: _formKey,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      const Text(
-                        'Welcome Back Kind Person',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                            fontSize: 25,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black),
-                      ),
-                      const SizedBox(height: 7),
-                      const Text(
-                        'Sign in to continue',
-                        style: TextStyle(
-                            fontSize: 25,
-                            color: Colors.black,
-                            fontWeight: FontWeight.normal),
-                      ),
-                      const SizedBox(height: 45),
-                      emailField,
-                      const SizedBox(height: 25),
-                      passwordField,
-                      const SizedBox(height: 35),
-                      loginButton,
-                      const SizedBox(height: 15),
-                      Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            const Text("Don't have an account? "),
-                            GestureDetector(
-                              onTap: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            const WelcomeScreen()));
-                              },
-                              child: const Text(
-                                "SignUp",
-                                style: TextStyle(
-                                    color: colorDarkBlue,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 15),
-                              ),
-                            )
-                          ])
-                    ],
-                  ),
+      body: Center(
+        child: SingleChildScrollView(
+          child: Container(
+            color: Colors.white,
+            child: Padding(
+              padding: const EdgeInsets.all(26.0),
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    const Text(
+                      'Welcome Back Kind Person',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          fontSize: 25,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black),
+                    ),
+                    const SizedBox(height: 7),
+                    const Text(
+                      'Sign in to continue',
+                      style: TextStyle(
+                          fontSize: 25,
+                          color: Colors.black,
+                          fontWeight: FontWeight.normal),
+                    ),
+                    const SizedBox(height: 45),
+                    emailField,
+                    const SizedBox(height: 25),
+                    passwordField,
+                    const SizedBox(height: 35),
+                    loginButton,
+                    const SizedBox(height: 15),
+                    Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          const Text("Don't have an account? "),
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const WelcomeScreen()));
+                            },
+                            child: const Text(
+                              "SignUp",
+                              style: TextStyle(
+                                  color: colorDarkBlue,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 15),
+                            ),
+                          )
+                        ])
+                  ],
                 ),
               ),
             ),
@@ -182,7 +181,7 @@ class _LoginState extends State<Login> {
             .then((uid) => {
                   Fluttertoast.showToast(msg: "Login Successful"),
                   Navigator.of(context).pushReplacement(MaterialPageRoute(
-                      builder: (context) => const HomeBlind())),
+                      builder: (context) => const LoginWrapper())),
                 });
       } on FirebaseAuthException catch (error) {
         switch (error.code) {
@@ -198,12 +197,11 @@ class _LoginState extends State<Login> {
           case "too-many-requests":
             errorMessage = "Try again later.";
             break;
-
           default:
             errorMessage = "Invalid Credentials";
         }
         Fluttertoast.showToast(msg: errorMessage!);
-        print(error.code);
+        // print(error.code);
       }
     }
   }

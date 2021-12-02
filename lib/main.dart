@@ -11,6 +11,7 @@ import 'package:bkind/screens/register_blind.dart';
 import 'package:bkind/screens/settings.dart';
 import 'package:bkind/screens/welcome_screen.dart';
 import 'package:bkind/screens/login_signup.dart';
+import 'package:bkind/screens/login_wrapper.dart';
 import 'package:bkind/utils/constants.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';

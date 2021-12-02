@@ -13,6 +13,9 @@ class PickupScreen extends StatelessWidget {
     required this.call,
   });
 
+  // make an async fucntion names getTotalUsers
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,19 +26,19 @@ class PickupScreen extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
+              const SizedBox(height: 100),
               const Text(
-                "Incoming...",
+                "Someone needs your help",
                 style: TextStyle(
-                  fontSize: 30,
+                  fontSize: 20,
                 ),
               ),
-              const SizedBox(height: 50),
-              const SizedBox(height: 15),
+              const SizedBox(height: 200),
               Text(
                 call.callerName,
                 style: const TextStyle(
                   fontWeight: FontWeight.bold,
-                  fontSize: 20,
+                  fontSize: 30,
                 ),
               ),
               const SizedBox(height: 75),
@@ -44,14 +47,16 @@ class PickupScreen extends StatelessWidget {
                 children: <Widget>[
                   IconButton(
                     icon: const Icon(Icons.call_end),
+                    iconSize: 40,
                     color: Colors.redAccent,
                     onPressed: () async {
                       await callMethods.endCall(call: call);
                     },
                   ),
-                  const SizedBox(width: 25),
+                  const SizedBox(width: 60),
                   IconButton(
                     icon: const Icon(Icons.call),
+                    iconSize: 40,
                     color: Colors.green,
                     onPressed: () async => await Permissions
                             .cameraAndMicrophonePermissionsGranted()

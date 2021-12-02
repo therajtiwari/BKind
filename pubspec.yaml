@@ -46,7 +46,6 @@ dependencies:
   provider: ^6.0.1
   # group_list_view: ^1.0.6
 
-
 dev_dependencies:
   flutter_test:
     sdk: flutter

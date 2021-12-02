@@ -1,6 +1,8 @@
 import 'package:bkind/models/user_model.dart';
 import 'package:bkind/provider/user_provider.dart';
 import 'package:bkind/screens/callscreens/pickup/pickup_layout.dart';
+import 'package:bkind/screens/login.dart';
+import 'package:bkind/screens/profile.dart';
 import 'package:bkind/utils/call_utilis.dart';
 import 'package:bkind/utils/constants.dart';
 import 'package:bkind/utils/permissions.dart';
@@ -103,59 +105,96 @@ class _HomeBlind extends State<HomeBlind> {
 // class HomeBlind extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('bKind'),
-          backgroundColor: colorDarkBlue,
-        ), //AppBar
-        body: SingleChildScrollView(
-          child: Column(children: [
-            Container(
-              alignment: Alignment.topCenter,
-              margin: const EdgeInsets.only(
-                left: 7.0,
-                right: 7.0,
-                top: 50.0,
-                bottom: 10.0,
-              ),
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  minimumSize: const Size(350, 450),
-                  primary: colorBlue2,
+    return WillPopScope(
+      onWillPop: () async => false,
+      child: MaterialApp(
+        home: Scaffold(
+          appBar: AppBar(
+            title: const Text('bKind'),
+            backgroundColor: colorDarkBlue,
+          ),
+          drawer: Drawer(
+            child: ListView(
+              padding: EdgeInsets.zero,
+              children: <Widget>[
+                Container(
+                  height: 100.0,
+                  child: DrawerHeader(
+                    decoration: const BoxDecoration(
+                      color: colorDarkBlue,
+                    ),
+                    child: Text(
+                      'Hello,  ${loggedInUser.name}',
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 24,
+                      ),
+                    ),
+                  ),
                 ),
-                child: const Text('Call first available user'),
-                onPressed: () async {
-                  // print("calling");
-                  await Permissions.cameraAndMicrophonePermissionsGranted()
-                      ? CallUtils.dial(
-                          from: loggedInUser, to: toCallUser, context: context)
-                      : print("no permission");
-                },
+                ListTile(
+                  leading: IconButton(
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const Profile()));
+                    },
+                    icon: const Icon(Icons.account_circle),
+                  ),
+                  title: const Text('Profile'),
+                ),
+                ListTile(
+                  leading: IconButton(
+                    onPressed: () {
+                      logout(context);
+                    },
+                    icon: const Icon(Icons.logout),
+                  ),
+                  title: const Text('Logout'),
+                ),
+
+                // ignore: prefer_const_constructors
+              ],
+            ),
+          ), //AppBar
+          body: SingleChildScrollView(
+            child: Column(children: [
+              Container(
+                alignment: Alignment.topCenter,
+                margin: const EdgeInsets.only(
+                  left: 7.0,
+                  right: 7.0,
+                  top: 50.0,
+                  bottom: 10.0,
+                ),
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    minimumSize: const Size(350, 450),
+                    primary: colorBlue2,
+                  ),
+                  child: const Text('Call first available user'),
+                  onPressed: () async {
+                    // print("calling");
+                    await Permissions.cameraAndMicrophonePermissionsGranted()
+                        ? CallUtils.dial(
+                            from: loggedInUser,
+                            to: toCallUser,
+                            context: context)
+                        : print("no permission");
+                  },
+                ),
               ),
-            ),
-          ]),
+            ]),
+          ),
         ),
-        bottomNavigationBar: BottomAppBar(
-            child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            IconButton(
-              icon: const Icon(Icons.home),
-              onPressed: () {},
-            ),
-            IconButton(
-              icon: const Icon(Icons.dialpad_outlined),
-              // alignment: Center,
-              onPressed: () {},
-            ),
-            IconButton(
-              icon: const Icon(Icons.settings),
-              onPressed: () {},
-            ),
-          ],
-        )),
       ),
     );
+  }
+
+  Future<void> logout(BuildContext context) async {
+    await FirebaseAuth.instance.signOut();
+    Navigator.of(context).pushReplacement(
+        MaterialPageRoute(builder: (context) => const Login()));
   }
 }
