@@ -11,14 +11,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
 
-class Home extends StatefulWidget {
-  const Home({Key? key}) : super(key: key);
+class HomeBlind extends StatefulWidget {
+  const HomeBlind({Key? key}) : super(key: key);
 
   @override
-  _Home createState() => _Home();
+  _HomeBlind createState() => _HomeBlind();
 }
 
-class _Home extends State<Home> {
+class _HomeBlind extends State<HomeBlind> {
   late UserProvider userProvider;
   User? user = FirebaseAuth.instance.currentUser;
   UserModel loggedInUser = UserModel(
@@ -72,7 +72,7 @@ class _Home extends State<Home> {
     });
   }
 
-// class Home extends StatelessWidget {
+// class HomeBlind extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(

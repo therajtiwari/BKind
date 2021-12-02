@@ -366,7 +366,6 @@ class _RegisterBlindState extends State<RegisterBlind> {
                             ))),
                     const SizedBox(height: 20),
                     nameField,
-
                     const SizedBox(height: 20),
                     emailField,
                     const SizedBox(height: 20),
@@ -377,13 +376,7 @@ class _RegisterBlindState extends State<RegisterBlind> {
                     countryField,
                     const SizedBox(height: 20),
                     languageField,
-                    // const SizedBox(height: 20),
-                    // timeField,
                     const SizedBox(height: 20),
-                    // timeFromField,
-                    // const SizedBox(height: 20),
-                    // timeTillField,
-                    // const SizedBox(height: 20),
                     signUpButton,
                     const SizedBox(height: 15),
                   ],
@@ -429,16 +422,12 @@ class _RegisterBlindState extends State<RegisterBlind> {
             errorMessage = "An undefined Error happened.";
         }
         Fluttertoast.showToast(msg: errorMessage!);
-        print(error.code);
+        // print(error.code);
       }
     }
   }
 
   postDetailsToFirestore() async {
-    // calling our firestore
-    // calling our user model
-    // sedning these values
-
     FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
     User? user = _auth.currentUser;
 
@@ -466,14 +455,12 @@ class _RegisterBlindState extends State<RegisterBlind> {
 
     userModel.userSince =
         DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now());
-    // print("Account created successfully 1:) ");
 
     await firebaseFirestore
         .collection("users")
         .doc(user.uid)
         .set(userModel.toMap());
     Fluttertoast.showToast(msg: "Account created successfully :) ");
-    // print("Account created successfully :) ");
 
     Navigator.pushAndRemoveUntil(
         (context),
