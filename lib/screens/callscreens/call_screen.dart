@@ -289,7 +289,7 @@ class _CallScreenState extends State<CallScreen> {
                           ),
                           child: Text(
                             _infoStrings[index],
-                            style: TextStyle(color: Colors.blueGrey),
+                            style: const TextStyle(color: Colors.blueGrey),
                           ),
                         ),
                       )

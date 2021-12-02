@@ -124,32 +124,18 @@ class _HomeVolunteerState extends State<HomeVolunteer> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
+                    SizedBox(
+                      height: 20.0,
+                    ),
                     Container(
-                      child: Text(
-                        "Hello, ${loggedInUser.name}",
-                        style: const TextStyle(fontSize: 20),
+                      alignment: Alignment.center,
+                      child: const Text(
+                        'Welcome to bKind',
+                        style: TextStyle(fontSize: 25),
                       ),
                     ),
-                    ListTile(
-                      leading: IconButton(
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const Profile()));
-                        },
-                        icon: const Icon(Icons.account_circle),
-                      ),
-                      title: const Text('Profile'),
-                    ),
-                    ListTile(
-                      leading: IconButton(
-                        onPressed: () {
-                          logout(context);
-                        },
-                        icon: const Icon(Icons.logout),
-                      ),
-                      title: const Text('Logout'),
+                    const SizedBox(
+                      height: 80,
                     ),
                     Container(
                       height: 250.0,

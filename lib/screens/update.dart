@@ -389,10 +389,6 @@ class _UpdateState extends State<Update> {
                     nameField,
 
                     const SizedBox(height: 20),
-
-                    passwordField,
-
-                    const SizedBox(height: 20),
                     countryField,
                     const SizedBox(height: 20),
                     languageField,
@@ -430,14 +426,14 @@ class _UpdateState extends State<Update> {
 
     UserModel userModel = UserModel(
       country: '',
-      email: '',
+      email: widget.loggedInUser!.email,
       language: '',
       name: '',
-      pTimeFrom: '',
-      pTimeTill: '',
+      pTimeFrom: widget.loggedInUser!.pTimeFrom,
+      pTimeTill: widget.loggedInUser!.pTimeTill,
       uid: '',
-      userSince: '',
-      isVol: false,
+      userSince: widget.loggedInUser!.userSince,
+      isVol: widget.loggedInUser!.isVol,
       rating: widget.loggedInUser!.rating,
     );
     print("hereeeeeeeeeee");
@@ -447,7 +443,7 @@ class _UpdateState extends State<Update> {
 
     userModel.uid = user!.uid;
     userModel.name = nameEditingController.text;
-    userModel.email = emailEditingController.text;
+    userModel.email = widget.loggedInUser!.email;
     userModel.country = _countryValue;
     userModel.language = _languageValue;
     userModel.pTimeFrom = timeFromInput.text;
