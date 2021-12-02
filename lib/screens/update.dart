@@ -429,18 +429,18 @@ class _UpdateState extends State<Update> {
 
     FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
 
-    // User? user = _auth.currentUser;
-
     UserModel userModel = UserModel(
-        country: '',
-        email: '',
-        language: '',
-        name: '',
-        pTimeFrom: '',
-        pTimeTill: '',
-        uid: '',
-        userSince: '',
-        isVol: false);
+      country: '',
+      email: '',
+      language: '',
+      name: '',
+      pTimeFrom: '',
+      pTimeTill: '',
+      uid: '',
+      userSince: '',
+      isVol: false,
+      rating: widget.loggedInUser!.rating,
+    );
     print("hereeeeeeeeeee");
     print(email);
     print(name);

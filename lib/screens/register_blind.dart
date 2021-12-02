@@ -440,7 +440,8 @@ class _RegisterBlindState extends State<RegisterBlind> {
         pTimeTill: '',
         uid: '',
         userSince: '',
-        isVol: true);
+        isVol: true,
+        rating: 5);
     print("hereeeeeeeeeee");
     // writing all the values
     userModel.email = user!.email!;

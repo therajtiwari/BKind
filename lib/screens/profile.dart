@@ -29,7 +29,8 @@ class _ProfileState extends State<Profile> {
       pTimeTill: '',
       uid: '',
       userSince: '',
-      isVol: false);
+      isVol: false,
+      rating: 5);
 
   @override
   void initState() {

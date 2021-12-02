@@ -1,6 +1,7 @@
 import 'dart:ui' as ui;
 
 import 'package:bkind/provider/user_provider.dart';
+import 'package:bkind/screens/about_us.dart';
 import 'package:bkind/screens/home_volunteer.dart';
 import 'package:bkind/screens/home_blind.dart';
 import 'package:bkind/screens/login.dart';
@@ -10,6 +11,7 @@ import 'package:bkind/screens/register_blind.dart';
 import 'package:bkind/screens/settings.dart';
 import 'package:bkind/screens/welcome_screen.dart';
 import 'package:bkind/screens/login_signup.dart';
+import 'package:bkind/screens/login_wrapper.dart';
 import 'package:bkind/utils/constants.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -54,7 +56,7 @@ class MyApp extends StatelessWidget {
           // accentColor: colorDarkBlues,
           textTheme: screenWidth < 500 ? textThemeSmall : textThemeDefault,
         ),
-        home: const LoginSignupScreen(),
+        home: AboutUs(),
       ),
     );
   }
