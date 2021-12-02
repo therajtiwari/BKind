@@ -30,7 +30,7 @@ class _Home extends State<Home> {
       pTimeTill: '',
       uid: '',
       userSince: '',
-      isVol: true);
+      isVol: false);
 
   UserModel toCallUser = UserModel(
       country: '',
@@ -62,7 +62,7 @@ class _Home extends State<Home> {
 
     FirebaseFirestore.instance
         .collection('users')
-        .where('email', isEqualTo: "raj@gmail.com")
+        .where('email', isEqualTo: "rajt@gmail.com")
         .get()
         .then((value) {
       toCallUser = UserModel.fromMap(value.docs[0].data());

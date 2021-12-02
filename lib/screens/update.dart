@@ -101,7 +101,7 @@ class _UpdateState extends State<Update> {
         ),
       ),
       onChanged: (value) {
-        nameEditingController.text = value!;
+        nameEditingController.text = value;
         print(name);
       },
       validator: (value) {
@@ -120,7 +120,7 @@ class _UpdateState extends State<Update> {
       autofocus: false,
       keyboardType: TextInputType.emailAddress,
       onChanged: (value) {
-        emailEditingController.text = value!;
+        emailEditingController.text = value;
         print(email);
       },
       textInputAction: TextInputAction.next,
