@@ -134,6 +134,13 @@ class _CallScreenState extends State<CallScreen> {
       int uid,
       int elapsed,
     ) {
+      if (!widget.call.hasDialled) {
+        // turn off local video
+        AgoraRtcEngine.disableVideo();
+      } else {
+        //switch camera
+        AgoraRtcEngine.switchCamera();
+      }
       setState(() {
         final info = 'onJoinChannel: $channel, uid: $uid';
         _infoStrings.add(info);
@@ -319,58 +326,75 @@ class _CallScreenState extends State<CallScreen> {
     return Container(
       alignment: Alignment.bottomCenter,
       padding: const EdgeInsets.symmetric(vertical: 48),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.end,
         children: <Widget>[
-          RawMaterialButton(
-            onPressed: _onToggleMute,
-            child: Icon(
-              muted ? Icons.mic : Icons.mic_off,
-              color: muted ? Colors.white : Colors.blueAccent,
-              size: 20.0,
-            ),
-            shape: CircleBorder(),
-            elevation: 2.0,
-            fillColor: muted ? Colors.blueAccent : Colors.white,
-            padding: const EdgeInsets.all(12.0),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              RawMaterialButton(
+                onPressed: _onToggleMute,
+                child: Icon(
+                  muted ? Icons.mic : Icons.mic_off,
+                  color: muted ? Colors.white : Colors.blueAccent,
+                  size: 30.0,
+                ),
+                shape: CircleBorder(),
+                elevation: 2.0,
+                fillColor: muted ? Colors.blueAccent : Colors.white,
+                padding: const EdgeInsets.all(12.0),
+              ),
+              RawMaterialButton(
+                onPressed: _onToggleSwitchVideo,
+                child: Icon(
+                  videoMuted ? Icons.videocam : Icons.videocam_off,
+                  color: videoMuted ? Colors.white : Colors.blueAccent,
+                  size: 30.0,
+                ),
+                shape: CircleBorder(),
+                elevation: 2.0,
+                fillColor: videoMuted ? Colors.blueAccent : Colors.white,
+                padding: const EdgeInsets.all(12.0),
+              ),
+              RawMaterialButton(
+                onPressed: _onSwitchCamera,
+                child: const Icon(
+                  Icons.switch_camera,
+                  color: Colors.blueAccent,
+                  size: 30.0,
+                ),
+                shape: const CircleBorder(),
+                elevation: 2.0,
+                fillColor: Colors.white,
+                padding: const EdgeInsets.all(12.0),
+              ),
+            ],
           ),
-          RawMaterialButton(
-            onPressed: _onToggleSwitchVideo,
-            child: Icon(
-              videoMuted ? Icons.videocam : Icons.videocam_off,
-              color: videoMuted ? Colors.white : Colors.blueAccent,
-              size: 20.0,
-            ),
-            shape: CircleBorder(),
-            elevation: 2.0,
-            fillColor: videoMuted ? Colors.blueAccent : Colors.white,
-            padding: const EdgeInsets.all(12.0),
+          const SizedBox(
+            height: 40,
           ),
-          RawMaterialButton(
-            onPressed: () => callMethods.endCall(
-              call: widget.call,
-            ),
-            child: const Icon(
-              Icons.call_end,
-              color: Colors.white,
-              size: 35.0,
-            ),
-            shape: const CircleBorder(),
-            elevation: 2.0,
-            fillColor: Colors.redAccent,
-            padding: const EdgeInsets.all(15.0),
-          ),
-          RawMaterialButton(
-            onPressed: _onSwitchCamera,
-            child: const Icon(
-              Icons.switch_camera,
-              color: Colors.blueAccent,
-              size: 20.0,
-            ),
-            shape: const CircleBorder(),
-            elevation: 2.0,
-            fillColor: Colors.white,
-            padding: const EdgeInsets.all(12.0),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SizedBox(
+                width: 300,
+                height: 100,
+                child: RawMaterialButton(
+                  onPressed: () => callMethods.endCall(
+                    call: widget.call,
+                  ),
+                  child: const Icon(
+                    Icons.call_end,
+                    color: Colors.white,
+                    size: 35.0,
+                  ),
+                  // shape: const CircleBorder(),
+                  elevation: 2.0,
+                  fillColor: Colors.pink,
+                  padding: const EdgeInsets.all(15.0),
+                ),
+              ),
+            ],
           )
         ],
       ),

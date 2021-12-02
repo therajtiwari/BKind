@@ -132,6 +132,28 @@ class _AboutUsState extends State<AboutUs> {
                 Container(
                   padding: const EdgeInsets.all(20.0),
                   child: const Align(
+                      alignment: Alignment.center,
+                      child: Text(
+                        "bKind",
+                        style: TextStyle(
+                          fontSize: 40,
+                          shadows: [
+                            Shadow(color: colorDarkBlue, offset: Offset(0, -5))
+                          ],
+                          color: Colors.transparent,
+                          decoration: TextDecoration.underline,
+                          decorationColor: colorDarkBlue,
+                          decorationThickness: 2,
+                          decorationStyle: TextDecorationStyle.solid,
+                        ),
+                      )),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Container(
+                  padding: const EdgeInsets.all(20.0),
+                  child: const Align(
                     alignment: Alignment.center,
                     child: Text(
                       "The mission of bKind is to make the world more accessible to persons who are blind or have impaired vision.",
@@ -146,7 +168,7 @@ class _AboutUsState extends State<AboutUs> {
                   child: const Align(
                     alignment: Alignment.center,
                     child: Text(
-                      "As a blind or low-vision individual, our volunteers are pleased to assist you whenever you want visual support. You and a volunteer may connect immediately and solve a problem via a live video conversation. The volunteer will assist you in determining which way to position your camera, what to focus on. The volunteer will also assist you in navigating the building and will help you find the right place to go.",
+                      "As a blind or low-vision individual, our volunteers are pleased to assist you whenever you want visual support. You and a volunteer may connect immediately and solve a problem via a live video conversation. The volunteer will assist you in determining which way to position your camera, what to focus on. The volunteer will also assist you in navigating the places and will help you find the right place to go.",
                       style: TextStyle(
                         fontSize: 16,
                       ),

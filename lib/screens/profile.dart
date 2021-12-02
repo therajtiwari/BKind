@@ -183,16 +183,88 @@ class _ProfileState extends State<Profile> {
                           backgroundColor: Colors.grey,
                         ),
                         addVerticalSpace(height * 0.05),
-                        Text(
-                          "Hello, ${loggedInUser.name}",
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          // crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            SizedBox(height: 10.0),
+
+                            Text(
+                              "Name: ${loggedInUser.name}",
+                              style: const TextStyle(
+                                fontSize: 20.0,
+                                // fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            SizedBox(height: 10.0),
+                            // add a divider
+                            const Divider(
+                              color: colorDarkBlue,
+                              thickness: 1.0,
+                              indent: 30,
+                              endIndent: 30,
+                            ),
+                            SizedBox(height: 10.0),
+
+                            Text(
+                              "Country: ${loggedInUser.country}",
+                              style: const TextStyle(
+                                fontSize: 20.0,
+                                // fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            // add a divider
+                            SizedBox(height: 10.0),
+                            const Divider(
+                              color: colorDarkBlue,
+                              thickness: 1.0,
+                              indent: 30,
+                              endIndent: 30,
+                            ),
+                            SizedBox(height: 10.0),
+
+                            Text(
+                              "Email: ${loggedInUser.email}",
+                              style: const TextStyle(
+                                fontSize: 20.0,
+                                // fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            SizedBox(height: 10.0),
+                            // add a divider
+                            const Divider(
+                              color: colorDarkBlue,
+                              thickness: 1.0,
+                              indent: 30,
+                              endIndent: 30,
+                            ),
+                            SizedBox(height: 10.0),
+
+                            Text(
+                              "Language: ${loggedInUser.language}",
+                              style: const TextStyle(
+                                fontSize: 20.0,
+                                // fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            // add a divider
+                            SizedBox(height: 10.0),
+
+                            const Divider(
+                              color: colorDarkBlue,
+                              thickness: 1.0,
+                              indent: 30,
+                              endIndent: 30,
+                            ),
+                            // addVerticalSpace(height * 0.02),
+                            // Text('Country: ${loggedInUser.country} '),
+                            // addVerticalSpace(height * 0.02),
+                            // Text('Email : ${loggedInUser.email}'),
+                            // addVerticalSpace(height * 0.02),
+                            // Text('Language : ${loggedInUser.language} '),
+                            // addVerticalSpace(height * 0.2),
+                          ],
                         ),
-                        addVerticalSpace(height * 0.02),
-                        Text('Country: ${loggedInUser.country} '),
-                        addVerticalSpace(height * 0.02),
-                        Text('Email : ${loggedInUser.email}'),
-                        addVerticalSpace(height * 0.02),
-                        Text('Language : ${loggedInUser.language} '),
-                        addVerticalSpace(height * 0.2),
                       ],
                     ),
                   ),
