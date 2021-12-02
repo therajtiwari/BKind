@@ -13,7 +13,7 @@ import 'package:http/http.dart' as http;
 
 // error @ 540, 552
 class RegisterBlind extends StatefulWidget {
-  // const Register({Key? key}) : super(key: key);
+  const RegisterBlind({Key? key}) : super(key: key);
 
   // our form key
   @override
@@ -255,7 +255,9 @@ class _RegisterBlindState extends State<RegisterBlind> {
         });
       },
       validator: (value) {
-        if (_countryValue!.isEmpty) {
+        if (_countryValue!.isEmpty ||
+            _countryValue == "Select Country" ||
+            _countryValue == "") {
           return ("Please select a country");
         }
       },
@@ -301,94 +303,6 @@ class _RegisterBlindState extends State<RegisterBlind> {
         }
       },
     );
-
-    // TextFormField(
-    //   controller: timeFromInput, //editing controller of this TextField
-    //   validator: (value) {
-    //     if (timeFromInput.text.isEmpty) {
-    //       return ("Please Select Time");
-    //     }
-    //   },
-
-    //   readOnly: true, //set it true, so that user will not able to edit text
-    //   decoration: InputDecoration(
-    //     prefixIcon: const Icon(Icons.access_time),
-    //     contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
-    //     hintText: "Preferred Time From",
-    //     border: OutlineInputBorder(
-    //       borderRadius: BorderRadius.circular(10),
-    //     ),
-    //   ),
-    //   onTap: () async {
-    //     TimeOfDay? pickedTime = await showTimePicker(
-    //       initialTime: TimeOfDay.now(),
-    //       context: context,
-    //     );
-
-    //     if (pickedTime != null) {
-    //       // print(pickedTime.format(context)); //output 10:51 PM
-    //       DateTime parsedTime =
-    //           DateFormat.jm().parse(pickedTime.format(context).toString());
-    //       //converting to DateTime so that we can further format on different pattern.
-    //       // print(parsedTime); //output 1970-01-01 22:53:00.000
-    //       String formattedTime = DateFormat('HH:mm:ss').format(parsedTime);
-    //       print(formattedTime); //output 14:59:00
-    //       //DateFormat() is from intl package, you can format the time on any pattern you need.
-
-    //       setState(
-    //         () {
-    //           timeFromInput.text = formattedTime; //set the value of text field.
-    //         },
-    //       );
-    //     } else {
-    //       print("Time is not selected");
-    //     }
-    //   },
-    // );
-
-    // final timeTillField = "01:00:00";
-    // TextFormField(
-    //   controller: timeTillInput, //editing controller of this TextField
-    //   validator: (value) {
-    //     if (timeTillInput.text.isEmpty) {
-    //       return ("Please Select Time");
-    //     }
-    //   },
-    //   readOnly: true, //set it true, so that user will not able to edit text
-    //   decoration: InputDecoration(
-    //     prefixIcon: const Icon(Icons.access_time),
-    //     contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
-    //     hintText: "Preferred Time Till",
-    //     border: OutlineInputBorder(
-    //       borderRadius: BorderRadius.circular(10),
-    //     ),
-    //   ),
-    //   onTap: () async {
-    //     TimeOfDay? pickedTime = await showTimePicker(
-    //       initialTime: TimeOfDay.now(),
-    //       context: context,
-    //     );
-
-    //     if (pickedTime != null) {
-    //       // print(pickedTime.format(context)); //output 10:51 PM
-    //       DateTime parsedTime =
-    //           DateFormat.jm().parse(pickedTime.format(context).toString());
-    //       //converting to DateTime so that we can further format on different pattern.
-    //       // print(parsedTime); //output 1970-01-01 22:53:00.000
-    //       String formattedTime = DateFormat('HH:mm:ss').format(parsedTime);
-    //       print(formattedTime); //output 14:59:00
-    //       //DateFormat() is from intl package, you can format the time on any pattern you need.
-
-    //       setState(
-    //         () {
-    //           timeTillInput.text = formattedTime; //set the value of text field.
-    //         },
-    //       );
-    //     } else {
-    //       print("Time is not selected");
-    //     }
-    //   },
-    // );
 
     //signup button
     final signUpButton = Material(
@@ -452,7 +366,6 @@ class _RegisterBlindState extends State<RegisterBlind> {
                             ))),
                     const SizedBox(height: 20),
                     nameField,
-
                     const SizedBox(height: 20),
                     emailField,
                     const SizedBox(height: 20),
@@ -463,13 +376,7 @@ class _RegisterBlindState extends State<RegisterBlind> {
                     countryField,
                     const SizedBox(height: 20),
                     languageField,
-                    // const SizedBox(height: 20),
-                    // timeField,
                     const SizedBox(height: 20),
-                    // timeFromField,
-                    // const SizedBox(height: 20),
-                    // timeTillField,
-                    // const SizedBox(height: 20),
                     signUpButton,
                     const SizedBox(height: 15),
                   ],
@@ -515,16 +422,12 @@ class _RegisterBlindState extends State<RegisterBlind> {
             errorMessage = "An undefined Error happened.";
         }
         Fluttertoast.showToast(msg: errorMessage!);
-        print(error.code);
+        // print(error.code);
       }
     }
   }
 
   postDetailsToFirestore() async {
-    // calling our firestore
-    // calling our user model
-    // sedning these values
-
     FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
     User? user = _auth.currentUser;
 
@@ -544,25 +447,24 @@ class _RegisterBlindState extends State<RegisterBlind> {
     userModel.uid = user.uid;
     userModel.name = nameEditingController.text;
     userModel.email = emailEditingController.text;
-    userModel.country = countryEditingController.text;
+    userModel.country = _countryValue;
     userModel.language = _languageValue;
     userModel.pTimeFrom = timeFromField;
     userModel.pTimeTill = timeTillInput;
-    userModel.isVol = isVolunteer;
+    userModel.isVol = false;
 
-    // userModel.userSince = DateTime.now().millisecondsSinceEpoch as String?;
     userModel.userSince =
         DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now());
-    // print("Account created successfully 1:) ");
 
     await firebaseFirestore
         .collection("users")
         .doc(user.uid)
         .set(userModel.toMap());
     Fluttertoast.showToast(msg: "Account created successfully :) ");
-    // print("Account created successfully :) ");
 
-    Navigator.pushAndRemoveUntil((context),
-        MaterialPageRoute(builder: (context) => Home()), (route) => false);
+    Navigator.pushAndRemoveUntil(
+        (context),
+        MaterialPageRoute(builder: (context) => const Home()),
+        (route) => false);
   }
 }

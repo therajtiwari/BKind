@@ -45,9 +45,11 @@ class PickupLayout extends StatelessWidget {
               }
             },
           )
-        : Scaffold(
-            body: Center(
-              child: CircularProgressIndicator(),
+        : const Scaffold(
+            body: SingleChildScrollView(
+              child: Center(
+                child: CircularProgressIndicator(),
+              ),
             ),
           );
   }
