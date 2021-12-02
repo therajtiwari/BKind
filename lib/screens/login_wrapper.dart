@@ -53,9 +53,12 @@ class _LoginWrapperState extends State<LoginWrapper> {
   @override
   Widget build(BuildContext context) {
     // return a spinner
-    return const Scaffold(
-      body: Center(
-        child: CircularProgressIndicator(),
+    return WillPopScope(
+      onWillPop: () async => false,
+      child: const Scaffold(
+        body: Center(
+          child: CircularProgressIndicator(),
+        ),
       ),
     );
   }

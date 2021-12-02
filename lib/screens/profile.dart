@@ -59,6 +59,51 @@ class _ProfileState extends State<Profile> {
             title: const Text('bKind'),
             backgroundColor: colorDarkBlue,
           ),
+          drawer: Drawer(
+            child: ListView(
+              padding: EdgeInsets.zero,
+              children: <Widget>[
+                Container(
+                  height: 100.0,
+                  child: DrawerHeader(
+                    decoration: const BoxDecoration(
+                      color: colorDarkBlue,
+                    ),
+                    child: Text(
+                      'Hello,  ${loggedInUser.name}',
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 24,
+                      ),
+                    ),
+                  ),
+                ),
+                ListTile(
+                  leading: IconButton(
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const Profile()));
+                    },
+                    icon: const Icon(Icons.account_circle),
+                  ),
+                  title: const Text('Profile'),
+                ),
+                ListTile(
+                  leading: IconButton(
+                    onPressed: () {
+                      logout(context);
+                    },
+                    icon: const Icon(Icons.logout),
+                  ),
+                  title: const Text('Logout'),
+                ),
+
+                // ignore: prefer_const_constructors
+              ],
+            ),
+          ),
           body: SingleChildScrollView(
             child: Padding(
               padding: const EdgeInsets.all(20.0),
@@ -95,27 +140,6 @@ class _ProfileState extends State<Profile> {
                         addVerticalSpace(height * 0.02),
                         Text('Language : ${loggedInUser.language} '),
                         addVerticalSpace(height * 0.2),
-                        Material(
-                          elevation: 5,
-                          borderRadius: BorderRadius.circular(10),
-                          color: colorBlue3,
-                          child: MaterialButton(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 0, vertical: 10.0),
-                              minWidth: MediaQuery.of(context).size.width,
-                              onPressed: () {
-                                logout(context);
-                                print('Logout');
-                              },
-                              child: const Text(
-                                "Logout",
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                    fontSize: 20,
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold),
-                              )),
-                        )
                       ],
                     ),
                   ),
