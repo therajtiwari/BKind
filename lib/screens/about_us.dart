@@ -373,7 +373,11 @@ class _AboutUsState extends State<AboutUs> {
                                 padding: const EdgeInsets.all(4.0),
                                 child: Center(
                                   child: Container(
-                                    child: const Icon(Icons.person),
+                                   
+                                    child: ClipOval(
+                                    child: Image.network(
+                                        'https://media-exp1.licdn.com/dms/image/C4E03AQEWT2QxqNNvcw/profile-displayphoto-shrink_800_800/0/1638479641705?e=1643846400&v=beta&t=eiz6Z01zVuF_39sc19Et7oRh03aShFs5qhHlHA02emE'),
+
 
                                     /// replace your image with the Icon
                                   ),
