@@ -155,7 +155,6 @@ class _HomeBlind extends State<HomeBlind> {
                             : const HomeBlind()),
                   ),
                 ),
-
                 ListTile(
                   leading: IconButton(
                     onPressed: () {
@@ -196,8 +195,6 @@ class _HomeBlind extends State<HomeBlind> {
                   title: const Text('Logout'),
                   onTap: () => logout(context),
                 ),
-
-                // ignore: prefer_const_constructors
               ],
             ),
           ), //AppBar
@@ -213,7 +210,7 @@ class _HomeBlind extends State<HomeBlind> {
                 ),
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    minimumSize: const Size(350, 450),
+                    minimumSize: const Size(350, 600),
                     primary: colorBlue2,
                   ),
                   child: const Text('Call first available user'),
